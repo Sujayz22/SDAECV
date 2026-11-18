@@ -1,0 +1,28 @@
+---
+description: SDAECV React components and section patterns
+globs: components/**
+alwaysApply: false
+---
+
+# Components
+
+## Map
+
+| File | Role |
+|------|------|
+| Navbar | Header + menu trigger |
+| CurveMenu/Menu, Curve | Fullscreen nav, SVG curve animation |
+| Hero, MissionSection, MessageSection, EventsSection | Homepage sections |
+| Footer, FooterContent | Sticky footer reveal (desktop clip-path) |
+| SmoothScroll | Lenis wrapper — wraps children in `page.tsx` |
+
+## Rules
+
+- Add `'use client'` only when needed (hooks, events, motion, Lenis)
+- Use theme tokens from `globals.css` (`primary`, `secondary`, `accent`, etc.)
+- Framer: variants pattern like `CurveMenu/Menu.tsx`; menu easing `[0.76, 0, 0.24, 1]`
+- Keep section components focused; avoid pulling CMS/API logic into sections until `lib/` exists
+
+## Animation
+
+- Shared keyframes in `app/globals.css`: `slideUp`, `fadeIn`

@@ -1,0 +1,489 @@
+[
+  {
+    "_id": "faq-connect-0",
+    "_type": "faq",
+    "question": "What should I wear to church?",
+    "answer": "While many choose to wear their \"Sabbath best,\" we warmly welcome you are. Our focus is always on the heart, worship, and fellowship — not on outward appearance.",
+    "category": "connect"
+  },
+  {
+    "_id": "faq-connect-1",
+    "_type": "faq",
+    "question": "Do you have programs for children and youth?",
+    "answer": "Absolutely! We have vibrant Sabbath School classes for every age group, from Cradle Roll to Ambassadors. Our youth programs are designed to make biblical learning engaging and relevant.",
+    "category": "connect"
+  },
+  {
+    "_id": "faq-connect-2",
+    "_type": "faq",
+    "question": "Is there a fellowship lunch after service?",
+    "answer": "Yes! We often share potluck lunches after the Divine Service. It's one of our most cherished traditions — everyone is welcome to join. Just bring a dish to share if you can!",
+    "category": "connect"
+  },
+  {
+    "_id": "faq-connect-3",
+    "_type": "faq",
+    "question": "Can I attend online if I can't be there in person?",
+    "answer": "Yes! We offer a live stream for those who cannot attend in person. You can join us from anywhere in the world on our website's live stream page.",
+    "category": "connect"
+  },
+  {
+    "_id": "faq-connect-4",
+    "_type": "faq",
+    "question": "How can I get involved in a ministry?",
+    "answer": "We have many ministry opportunities — music, health, community outreach, and more. Reach out to us via the form on this page or speak to any of our leaders after service.",
+    "category": "connect"
+  },
+  {
+    "_id": "ministry-singing-band",
+    "_type": "ministry",
+    "name": "Singing Band",
+    "slug": {
+      "_type": "slug",
+      "current": "singing-band"
+    },
+    "tagline": "Worship through sacred song",
+    "icon": "music_note",
+    "gradient": "from-[#5b2d9c]/20 to-[#e36520]/20",
+    "description": "Elevating worship through choral and vocal harmony. The Singing Band coordinates special choruses, leads congregational praise, and shares the gospel through sacred musical programs."
+  },
+  {
+    "_id": "ministry-outreach",
+    "_type": "ministry",
+    "name": "Outreach Ministry",
+    "slug": {
+      "_type": "slug",
+      "current": "outreach"
+    },
+    "tagline": "Hands and feet of Jesus in Vellore",
+    "icon": "volunteer_activism",
+    "gradient": "from-[#448d21]/20 to-[#5b2d9c]/20",
+    "description": "Coordinating active missionary work and community support. From health outreach camps and literature distribution to organizing food and clothing drives for families in need."
+  },
+  {
+    "_id": "ministry-youth",
+    "_type": "ministry",
+    "name": "Adventist Youth Programme",
+    "slug": {
+      "_type": "slug",
+      "current": "youth"
+    },
+    "tagline": "Empowering the next generation",
+    "icon": "diversity_3",
+    "gradient": "from-[#e36520]/20 to-[#448d21]/20",
+    "description": "A vibrant fellowship for youth and young adults. We foster spiritual growth, leadership training, and deep community bonds through youth retreats, devotionals, and outreach."
+  },
+  {
+    "_id": "ministry-womens-ministry",
+    "_type": "ministry",
+    "name": "Women's Ministry",
+    "slug": {
+      "_type": "slug",
+      "current": "womens-ministry"
+    },
+    "tagline": "Nurturing faith and service",
+    "icon": "spa",
+    "gradient": "from-[#5b2d9c]/25 to-[#5b2d9c]/5",
+    "description": "Supporting, encouraging, and equipping women in their spiritual walk and daily lives. Activities include weekly prayer circles, family life seminars, and local charitable service."
+  },
+  {
+    "_id": "ministry-pathfinders",
+    "_type": "ministry",
+    "name": "Pathfinders",
+    "slug": {
+      "_type": "slug",
+      "current": "pathfinders"
+    },
+    "tagline": "Adventure, leadership, and faith",
+    "icon": "explore",
+    "gradient": "from-[#448d21]/25 to-[#448d21]/5",
+    "description": "A scout-like ministry for children and teenagers. Pathfinders learn life skills, outdoor woodcraft and survival, engage in community service projects, and grow in their faith."
+  },
+  {
+    "_id": "ministry-social-fellowship",
+    "_type": "ministry",
+    "name": "Social & Fellowship",
+    "slug": {
+      "_type": "slug",
+      "current": "social-fellowship"
+    },
+    "tagline": "Building a warm family bond",
+    "icon": "celebration",
+    "gradient": "from-[#e36520]/25 to-[#e36520]/5",
+    "description": "Cultivating a close-knit, welcoming church community. We coordinate our cherished potluck fellowship lunches, recreational outings, and family gatherings that bring us closer together."
+  },
+  {
+    "_id": "ministry-prayer-ministry",
+    "_type": "ministry",
+    "name": "Prayer Ministry",
+    "slug": {
+      "_type": "slug",
+      "current": "prayer-ministry"
+    },
+    "tagline": "Interceding for one another",
+    "icon": "favorite",
+    "gradient": "from-[#5b2d9c]/20 to-[#448d21]/20",
+    "description": "The spiritual powerhouse of the church, dedicated to prayer. We maintain an active intercessory prayer chain, host weekly prayer meetings, and faithfully lift up the church and community needs."
+  },
+  {
+    "_id": "faq-visit-0",
+    "_type": "faq",
+    "question": "What should I wear?",
+    "answer": "Come are. While many members dress formally, there is absolutely no dress code. We care far more about you being present than what you're wearing.",
+    "category": "visit"
+  },
+  {
+    "_id": "faq-visit-1",
+    "_type": "faq",
+    "question": "Do I need to bring anything?",
+    "answer": "Just yourself! We'll provide a bulletin at the door. If you'd like to follow along with Scripture, you're welcome to bring a Bible — or use your phone.",
+    "category": "visit"
+  },
+  {
+    "_id": "faq-visit-2",
+    "_type": "faq",
+    "question": "Is there a programme for children?",
+    "answer": "Yes! We have a dedicated Sabbath School for children and youth that runs at the same time main service. They are in safe hands with trained volunteers.",
+    "category": "visit"
+  },
+  {
+    "_id": "faq-visit-3",
+    "_type": "faq",
+    "question": "Do I have to give an offering?",
+    "answer": "Absolutely not. The offering is strictly for those who are members and wish to participate. There is no pressure, no plate passed to visitors.",
+    "category": "visit"
+  },
+  {
+    "_id": "faq-visit-4",
+    "_type": "faq",
+    "question": "What language is the service in?",
+    "answer": "The primary service is in English. We also have resources available in Tamil. Our congregation includes members from diverse linguistic backgrounds.",
+    "category": "visit"
+  },
+  {
+    "_id": "faq-visit-5",
+    "_type": "faq",
+    "question": "Is parking available?",
+    "answer": "Yes, free parking is available on the church campus. If you're arriving by auto-rickshaw or bus, the campus is well-known locally — simply ask for the \"SDA Church, Bagayam\".",
+    "category": "visit"
+  },
+  {
+    "_id": "milestone-1945-0",
+    "_type": "milestone",
+    "year": "1945",
+    "era": "Medical Education Begins",
+    "tag": "Origin",
+    "headline": "Partnership Forged with CMC",
+    "body": "The Southern Asia Division began negotiations with Christian Medical College, Vellore. Dr. Theodore R. Flaiz was appointed to develop a sponsorship programme for Adventist medical students. Advertisements were published across the Division inviting qualified students.",
+    "detail": "Dr. Flaiz envisioned a pipeline of trained Adventist physicians who would carry healing and the gospel across South Asia."
+  },
+  {
+    "_id": "milestone-1947-1",
+    "_type": "milestone",
+    "year": "1947",
+    "era": "First Students",
+    "tag": "Milestone",
+    "headline": "Dr. Quinn Enters CMC",
+    "body": "CMC launched its first co-educational medical programme. Dr. John Quinn became the first known Adventist student admitted through the sponsorship programme — pioneering a generation of faith-driven physicians.",
+    "detail": "Quinn's admission opened the door. Within a decade, dozens of Adventist students would follow him through CMC's gates."
+  },
+  {
+    "_id": "milestone-1948-2",
+    "_type": "milestone",
+    "year": "1948",
+    "era": "Official Representation",
+    "tag": "Growth",
+    "headline": "Faculty & Leaders at the Table",
+    "body": "Adventist leaders and medical representatives regularly attended CMC Council meetings. Dr. Thomas Thompson joined the CMC faculty official Adventist representative, cementing institutional ties.",
+    "detail": "The church secured a permanent voice within CMC's governance — not merely a beneficiary, but a partner."
+  },
+  {
+    "_id": "milestone-1950-3",
+    "_type": "milestone",
+    "year": "1950",
+    "era": "Community Deepens",
+    "tag": "Growth",
+    "headline": "Standards & Women Pioneers",
+    "body": "Qualification criteria for Adventist-sponsored medical students were formally established. Elizabeth Fernando became one of the earliest Adventist women to enter the medical programme — a landmark in the church's commitment to women in ministry and medicine.",
+    "detail": "The church insisted on excellence and inclusion from the very beginning."
+  },
+  {
+    "_id": "milestone-1953-4",
+    "_type": "milestone",
+    "year": "1953",
+    "era": "Adventist Faculty Arrive",
+    "tag": "Milestone",
+    "headline": "The Janzens Come to Vellore",
+    "body": "Dr. Jacob and Dr. Ernestine Janzen joined CMC faculty. Sabbath worship services began meeting at the Mission Bungalow. Dr. John Quinn completed his studies — among the very first Adventist medical graduates from CMC.",
+    "detail": "The Janzens brought institutional weight. Suddenly this was not just a student fellowship but a genuine congregation in formation."
+  },
+  {
+    "_id": "milestone-1954-5",
+    "_type": "milestone",
+    "year": "1954",
+    "era": "Village Ministry",
+    "tag": "Outreach",
+    "headline": "Chitteri Sabbath School",
+    "body": "Dr. Albert J. Patt and six students launched a Branch Sabbath School in Chitteri village. The village headman offered his family courtyard for weekly meetings. Over seventy children eventually gathered each week.",
+    "detail": "Health education, Bible stories, singing programmes, and missionary activities ran weekly. Several children were later helped into Adventist education at Lowry Memorial College."
+  },
+  {
+    "_id": "milestone-1958-6",
+    "_type": "milestone",
+    "year": "1958",
+    "era": "The Founding",
+    "tag": "Founding",
+    "headline": "The Church Is Organized",
+    "body": "On November 29, 1958, twenty-three charter members officially organized the Vellore Adventist Church. Worship was held in the living room of Dr. Patt's Maranatha Bungalow. English and Tamil Sabbath Schools operated simultaneously from day one.",
+    "detail": "Members were actively trained in church leadership and evangelism — a community built not just for worship but for mission."
+  },
+  {
+    "_id": "milestone-1959-7",
+    "_type": "milestone",
+    "year": "1959",
+    "era": "Training Begins",
+    "tag": "Community",
+    "headline": "Prayer & Leadercraft",
+    "body": "Prayer and Leadercraft training programmes were introduced for Adventist students at CMC — forming the spiritual backbone of a generation of future church leaders and medical missionaries.",
+    "detail": "The church understood that healing hands must be guided by trained hearts."
+  },
+  {
+    "_id": "milestone-1963-8",
+    "_type": "milestone",
+    "year": "1963",
+    "era": "Established Ministries",
+    "tag": "Growth",
+    "headline": "Membership Reaches 35",
+    "body": "The congregation grew to approximately thirty-five members. Separate English and Tamil worship groups functioned regularly. Midweek prayer meetings, singing bands, literature ministry, and village Sabbath Schools became established ministries.",
+    "detail": "The Sabbath School was recognized that year for its excellent organization — a sign of maturity and intentionality."
+  },
+  {
+    "_id": "milestone-1964-9",
+    "_type": "milestone",
+    "year": "1964",
+    "era": "Evangelism Grows",
+    "tag": "Outreach",
+    "headline": "40 Bibles Distributed",
+    "body": "The church's Sabbath School was formally recognized for its excellent organisation. Medical students conducted evangelistic meetings in Chitteri village. Forty Bibles were distributed during outreach campaigns across the region.",
+    "detail": "By now the church was not merely surviving — it was actively multiplying its witness."
+  },
+  {
+    "_id": "milestone-1965-10",
+    "_type": "milestone",
+    "year": "1965",
+    "era": "A Generation Trained",
+    "tag": "Milestone",
+    "headline": "21 CMC Graduates",
+    "body": "Twenty-one Adventist medical students had graduated from CMC by this year. Dr. Patt and Dr. Small were formally acknowledged for their extraordinary contributions to the congregation's shape and character over the preceding decade.",
+    "detail": "Twenty-one doctors. Each one carrying faith into wards, villages, and nations."
+  },
+  {
+    "_id": "milestone-1966-11",
+    "_type": "milestone",
+    "year": "1966",
+    "era": "Evangelistic Growth",
+    "tag": "Outreach",
+    "headline": "Baptisms in Budoor Village",
+    "body": "Evangelistic campaigns were conducted in Budoor village and surrounding areas. Several people from non-Christian backgrounds accepted baptism. Church membership reached approximately forty — nearly double the founding number.",
+    "detail": "The mission was no longer confined to the CMC campus. It was spreading into Tamil Nadu's villages."
+  },
+  {
+    "_id": "milestone-1968-12",
+    "_type": "milestone",
+    "year": "1968",
+    "era": "Medical Mission",
+    "tag": "Mission",
+    "headline": "Eye Camps & Cataract Surgery",
+    "body": "Adventist ophthalmologist Dr. John C. Abraham organised eye camps and cataract surgeries for surrounding communities. Sixteen Adventist students were enrolled in medical training at CMC.",
+    "detail": "Healing sight — physical and spiritual — became a defining image of this congregation's ministry."
+  },
+  {
+    "_id": "milestone-1969-13",
+    "_type": "milestone",
+    "year": "1969",
+    "era": "Retreat & Fellowship",
+    "tag": "Community",
+    "headline": "First Retreat at Horsley Hills",
+    "body": "The first Adventist church retreat was organised at Horsley Hills. Medical students, staff, pastors, and alumni attended — a tradition of fellowship, renewal, and recommitment that has continued ever since.",
+    "detail": "A church that prays together in the hills stays together through the valleys."
+  },
+  {
+    "_id": "milestone-1970-14",
+    "_type": "milestone",
+    "year": "1970",
+    "era": "Youth & Legacy",
+    "tag": "Growth",
+    "headline": "Youth Centre Dedicated",
+    "body": "Land was acquired near Bagayam. A Youth Centre was built and dedicated for Sabbath School and Adventist Youth activities. Dr. Theodore R. Flaiz completed fifty years of medical missionary service — a milestone celebrated by the entire community.",
+    "detail": "The Youth Centre gave the next generation a physical home for their faith formation."
+  },
+  {
+    "_id": "milestone-1971-15",
+    "_type": "milestone",
+    "year": "1971",
+    "era": "Medical Institute",
+    "tag": "Mission",
+    "headline": "CMC Hosts Evangelical Medical Institute",
+    "body": "CMC hosted a major Evangelical Medical Institute. Adventist physicians and leaders taught health evangelism, physiology, counseling, nutrition, and family life — drawing attendees from across South Asia.",
+    "detail": "Vellore became a classroom for the integration of medicine and mission."
+  },
+  {
+    "_id": "milestone-1972-16",
+    "_type": "milestone",
+    "year": "1972",
+    "era": "Expansion",
+    "tag": "Outreach",
+    "headline": "Village Schools Multiply",
+    "body": "Branch Sabbath Schools expanded into additional villages across the region. Students and doctors travelled weekly to conduct children's ministries and health education programmes. Plans for a permanent church building accelerated.",
+    "detail": "The congregation outgrew borrowed spaces. A permanent home was now not just a dream — it was a necessity."
+  },
+  {
+    "_id": "milestone-1973-17",
+    "_type": "milestone",
+    "year": "1973",
+    "era": "Building Begins",
+    "tag": "Milestone",
+    "headline": "Construction Starts",
+    "body": "Construction of a permanent church building began — designed to seat approximately 120 worshippers. Funds were raised through donations from members and supporters who had prayed for this day for fifteen years.",
+    "detail": "Every brick laid was an act of faith. Every donation a declaration of permanence."
+  },
+  {
+    "_id": "milestone-1975-18",
+    "_type": "milestone",
+    "year": "1975",
+    "era": "Historic Dedication",
+    "tag": "Founding",
+    "headline": "The Doors Open",
+    "body": "The Vellore Seventh-day Adventist Church building was officially dedicated. Designed by R. S. Senseman. Pastor C. P. Jonahs presided. Membership had grown to approximately 120 — five times the charter count of 1958.",
+    "detail": "From a living room to a sanctuary. Seventeen years of faithfulness made permanent in stone and timber."
+  },
+  {
+    "_id": "alumnipin-india",
+    "_type": "alumniPin",
+    "name": "India Alumni",
+    "locationName": "India",
+    "lat": 12.9165,
+    "lng": 79.1325,
+    "year": 2026,
+    "details": "SDAECV Alumni serving in India"
+  },
+  {
+    "_id": "alumnipin-pakistan",
+    "_type": "alumniPin",
+    "name": "Pakistan Alumni",
+    "locationName": "Pakistan",
+    "lat": 24.8607,
+    "lng": 67.0011,
+    "year": 2026,
+    "details": "SDAECV Alumni serving in Pakistan"
+  },
+  {
+    "_id": "alumnipin-nepal",
+    "_type": "alumniPin",
+    "name": "Nepal Alumni",
+    "locationName": "Nepal",
+    "lat": 27.7172,
+    "lng": 85.324,
+    "year": 2026,
+    "details": "SDAECV Alumni serving in Nepal"
+  },
+  {
+    "_id": "alumnipin-bhutan",
+    "_type": "alumniPin",
+    "name": "Bhutan Alumni",
+    "locationName": "Bhutan",
+    "lat": 27.4728,
+    "lng": 89.639,
+    "year": 2026,
+    "details": "SDAECV Alumni serving in Bhutan"
+  },
+  {
+    "_id": "alumnipin-sri-lanka",
+    "_type": "alumniPin",
+    "name": "Sri Lanka Alumni",
+    "locationName": "Sri Lanka",
+    "lat": 6.9271,
+    "lng": 79.8612,
+    "year": 2026,
+    "details": "SDAECV Alumni serving in Sri Lanka"
+  },
+  {
+    "_id": "alumnipin-burma",
+    "_type": "alumniPin",
+    "name": "Burma Alumni",
+    "locationName": "Burma",
+    "lat": 16.8661,
+    "lng": 96.1951,
+    "year": 2026,
+    "details": "SDAECV Alumni serving in Burma"
+  },
+  {
+    "_id": "alumnipin-malaysia",
+    "_type": "alumniPin",
+    "name": "Malaysia Alumni",
+    "locationName": "Malaysia",
+    "lat": 3.139,
+    "lng": 101.6869,
+    "year": 2026,
+    "details": "SDAECV Alumni serving in Malaysia"
+  },
+  {
+    "_id": "alumnipin-singapore",
+    "_type": "alumniPin",
+    "name": "Singapore Alumni",
+    "locationName": "Singapore",
+    "lat": 1.3521,
+    "lng": 103.8198,
+    "year": 2026,
+    "details": "SDAECV Alumni serving in Singapore"
+  },
+  {
+    "_id": "givingSettings",
+    "_type": "givingSettings",
+    "memoryVerseQuote": "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.",
+    "memoryVerseRef": "2 Corinthians 9:7",
+    "upiId": "seventhdayadv316@sbi",
+    "bankDetails": {
+      "accountName": "SDA Church",
+      "accountNumber": "10507878497",
+      "bankName": "State Bank of India",
+      "branch": "Bagayam (Vellore), Christian Medical College Campus",
+      "ifscCode": "SBIN0002203",
+      "cifNo": "80398219137"
+    },
+    "stewardshipQAs": []
+  },
+  {
+    "_id": "homePageSettings",
+    "_type": "homePageSettings",
+    "heroHeadline": "Events & Gatherings.",
+    "heroSubheadline": "Join us in fellowship and community. Find your place at SDAECV.",
+    "heroCtaText": "View Calendar",
+    "heroCtaUrl": "#events-calendar",
+    "welcomeTitle": "Known by Love.",
+    "welcomeSubtitle": "Worship with us every Sabbath morning.",
+    "welcomeDescription": "Welcome to the Seventh-day Adventist English Church in Vellore. We are a community of believers dedicated to worship, service, and fellowship. Join us as we grow together in faith and love.",
+    "serviceTimes": [
+      {
+        "label": "Sabbath School",
+        "time": "8:45 AM",
+        "detail": "Bible study for all age groups. Interactive discussions, a deeply welcoming environment."
+      },
+      {
+        "label": "Divine Worship",
+        "time": "10:30 AM",
+        "detail": "Our main worship service. Music, Scripture, and a sermon centred on the Gospel."
+      },
+      {
+        "label": "Online Stream",
+        "time": "Every Sabbath",
+        "detail": "Can't make it in person? Watch the full service live from wherever you are."
+      },
+      {
+        "label": "Youth & Children",
+        "time": "During Service",
+        "detail": "Age-appropriate programmes running in parallel with the main worship service."
+      }
+    ]
+  }
+]

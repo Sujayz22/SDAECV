@@ -1,0 +1,1045 @@
+[
+  {
+    "_id": "category-sermon-series",
+    "_type": "category",
+    "title": "Sermon Series",
+    "slug": {
+      "_type": "slug",
+      "current": "sermon-series"
+    },
+    "description": "Category for Sermon Series articles."
+  },
+  {
+    "_id": "category-community",
+    "_type": "category",
+    "title": "Community",
+    "slug": {
+      "_type": "slug",
+      "current": "community"
+    },
+    "description": "Category for Community articles."
+  },
+  {
+    "_id": "category-devotional",
+    "_type": "category",
+    "title": "Devotional",
+    "slug": {
+      "_type": "slug",
+      "current": "devotional"
+    },
+    "description": "Category for Devotional articles."
+  },
+  {
+    "_id": "category-events",
+    "_type": "category",
+    "title": "Events",
+    "slug": {
+      "_type": "slug",
+      "current": "events"
+    },
+    "description": "Category for Events articles."
+  },
+  {
+    "_id": "category-doctrine",
+    "_type": "category",
+    "title": "Doctrine",
+    "slug": {
+      "_type": "slug",
+      "current": "doctrine"
+    },
+    "description": "Category for Doctrine articles."
+  },
+  {
+    "_id": "category-youth",
+    "_type": "category",
+    "title": "Youth",
+    "slug": {
+      "_type": "slug",
+      "current": "youth"
+    },
+    "description": "Category for Youth articles."
+  },
+  {
+    "_id": "category-service",
+    "_type": "category",
+    "title": "Service",
+    "slug": {
+      "_type": "slug",
+      "current": "service"
+    },
+    "description": "Category for Service articles."
+  },
+  {
+    "_id": "author-pr--david-solomon",
+    "_type": "author",
+    "name": "Pr. David Solomon",
+    "slug": {
+      "_type": "slug",
+      "current": "pr--david-solomon"
+    },
+    "role": "Lead Pastor",
+    "bio": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Pr. David Solomon is a Lead Pastor to SDAECV.",
+            "marks": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "author-elder-thomas-john",
+    "_type": "author",
+    "name": "Elder Thomas John",
+    "slug": {
+      "_type": "slug",
+      "current": "elder-thomas-john"
+    },
+    "role": "Head Elder",
+    "bio": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Elder Thomas John is a Head Elder to SDAECV.",
+            "marks": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "author-sr--priya-daniel",
+    "_type": "author",
+    "name": "Sr. Priya Daniel",
+    "slug": {
+      "_type": "slug",
+      "current": "sr--priya-daniel"
+    },
+    "role": "Health Ministries",
+    "bio": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Sr. Priya Daniel is a Health Ministries to SDAECV.",
+            "marks": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "author-media-team",
+    "_type": "author",
+    "name": "Media Team",
+    "slug": {
+      "_type": "slug",
+      "current": "media-team"
+    },
+    "role": "SDAECV Communications",
+    "bio": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Media Team is a SDAECV Communications to SDAECV.",
+            "marks": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "author-sr--ruth-esther",
+    "_type": "author",
+    "name": "Sr. Ruth Esther",
+    "slug": {
+      "_type": "slug",
+      "current": "sr--ruth-esther"
+    },
+    "role": "AY Leader",
+    "bio": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Sr. Ruth Esther is a AY Leader to SDAECV.",
+            "marks": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "author-sr--mary-philip",
+    "_type": "author",
+    "name": "Sr. Mary Philip",
+    "slug": {
+      "_type": "slug",
+      "current": "sr--mary-philip"
+    },
+    "role": "Community Services",
+    "bio": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Sr. Mary Philip is a Community Services to SDAECV.",
+            "marks": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "post-walking-in-truth-a-guide-for-the-new-season",
+    "_type": "post",
+    "title": "Walking in Truth: A Guide for the New Season",
+    "slug": {
+      "_type": "slug",
+      "current": "walking-in-truth-a-guide-for-the-new-season"
+    },
+    "excerpt": "Discovering the strength to navigate uncertain paths through foundational Biblical principles and communal support.",
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Seasons of change are inevitable. Just as the leaves turn in autumn and the flowers bloom in spring, our spiritual lives go through cycles of growth, dormancy, pruning, and harvest. Yet, while we often accept these changes in nature, we frequently resist them in our own lives. We cling to the familiar, fearing the uncertainty of the new.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Walking in faith doesn't mean having a map of the entire journey. It implies trusting the Guide even when the fog rolls in. In this new season for our community, we are being called to step out of our comfort zones and into a place of deeper reliance on God's provision.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Embracing the Unknown",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "The unknown is often the breeding ground for fear, but it is also the canvas for faith. When Abraham left his home, he didn't know where he was going (Hebrews 11:8). He only knew Who had called him. Similarly, as we navigate this transition, our focus must shift from the \"what\" and \"where\" to the \"Who.\"",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "blockquote",
+        "children": [
+          {
+            "_type": "span",
+            "text": "\"Faith is taking the first step even when you don't see the whole staircase.\"",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "This perspective changes everything. Instead of anxiety, we find anticipation. Instead of dread, we discover hope. We begin to look for the small miracles that happen daily—the conversations that encourage us, the resources that appear just in time, and the peace that surpasses understanding.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Practical Steps for the Week",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "How do we live this out practically? It starts with our daily habits. Here are three simple ways to ground yourself this week:",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "listItem": "number",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Morning Silence:",
+            "marks": [
+              "strong"
+            ]
+          },
+          {
+            "_type": "span",
+            "text": " Dedicate the first 5 minutes of your day to prayer and silence before picking up your phone.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "listItem": "number",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Scripture Journaling:",
+            "marks": [
+              "strong"
+            ]
+          },
+          {
+            "_type": "span",
+            "text": " Write down one verse that encourages you, specifically related to change and God's faithfulness.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "listItem": "number",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Community Connection:",
+            "marks": [
+              "strong"
+            ]
+          },
+          {
+            "_type": "span",
+            "text": " Reach out to a fellow church member to share a word of encouragement.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "As we move forward, let us remember that we do not walk alone. We walk as a body, supporting one another, bearing each other's burdens, and celebrating each other's victories. This is the essence of our fellowship—a community bound not by perfection, but by a shared journey towards the Heavenly Kingdom.",
+            "marks": []
+          }
+        ]
+      }
+    ],
+    "date": "2023-11-11T18:30:00.000Z",
+    "readTime": "10 min read",
+    "featured": true,
+    "tags": [
+      "Faith",
+      "Devotional",
+      "Community"
+    ],
+    "category": {
+      "_type": "reference",
+      "_ref": "category-sermon-series"
+    },
+    "author": {
+      "_type": "reference",
+      "_ref": "author-pr--david-solomon"
+    }
+  },
+  {
+    "_id": "post-unity-in-diversity-the-vellore-chapter",
+    "_type": "post",
+    "title": "Unity in Diversity: The Vellore Chapter",
+    "slug": {
+      "_type": "slug",
+      "current": "unity-in-diversity-the-vellore-chapter"
+    },
+    "excerpt": "Exploring how our diverse congregation finds common ground in service and worship every Sabbath morning.",
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Vellore is a city of many languages, traditions, and backgrounds. Our congregation reflects this beautiful diversity. On any given Sabbath, you will find professionals, students, homemakers, and retirees worshipping side by side—each bringing a unique expression of faith to the table.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Finding Common Ground",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "What binds us together is not our similarities but our shared Saviour. The body of Christ is designed for diversity. When Paul writes in 1 Corinthians 12 about the body having many parts, he is describing the exact reality we live out in our fellowship.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "blockquote",
+        "children": [
+          {
+            "_type": "span",
+            "text": "\"There is neither Jew nor Gentile, neither slave nor free, nor is there male and female, for you are all one in Christ Jesus.\" — Galatians 3:28",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "We have seen this play out beautifully in our community outreach programmes, where people of different backgrounds work alongside one another with a single goal: to serve others in the name of Jesus.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Moving Forward Together",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "As we plan our upcoming community events, we are intentional about creating spaces where every voice is heard and every contribution is valued. Unity is not uniformity — it is harmony in diversity, and we celebrate that every Sabbath.",
+            "marks": []
+          }
+        ]
+      }
+    ],
+    "date": "2023-10-23T18:30:00.000Z",
+    "readTime": "6 min read",
+    "featured": false,
+    "tags": [
+      "Community",
+      "Fellowship"
+    ],
+    "category": {
+      "_type": "reference",
+      "_ref": "category-community"
+    },
+    "author": {
+      "_type": "reference",
+      "_ref": "author-elder-thomas-john"
+    }
+  },
+  {
+    "_id": "post-stewards-of-the-earth-our-mission",
+    "_type": "post",
+    "title": "Stewards of the Earth: Our Mission",
+    "slug": {
+      "_type": "slug",
+      "current": "stewards-of-the-earth-our-mission"
+    },
+    "excerpt": "Small acts of creation care that ripple through our local community, reflecting God's love for His handiwork.",
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "The very first responsibility God gave humanity was to be stewards of creation. In Genesis 2:15, we read that God placed mankind in the Garden of Eden \"to tend and keep it.\" This mandate has never been revoked.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Faith and the Environment",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "As Seventh-day Adventists, we have a unique perspective on health and creation. Our understanding of the body as a temple of the Holy Spirit extends naturally to our care for the world around us. A polluted environment affects our health, our communities, and our witness.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "blockquote",
+        "children": [
+          {
+            "_type": "span",
+            "text": "\"The earth is the Lord's, and everything in it, the world, and all who live in it.\" — Psalm 24:1",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Our Health Ministries department has been actively promoting creation care through practical initiatives: community clean-up drives near our church premises, promoting plant-based diets, and educating our Sabbath School classes on environmental stewardship.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Small Steps, Big Impact",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "You don't need to make grand gestures to be a faithful steward. Start small — carry a reusable bag, reduce single-use plastics, plant a tree, or simply take a walk in nature and let gratitude fill your heart for the world God has made.",
+            "marks": []
+          }
+        ]
+      }
+    ],
+    "date": "2023-10-21T18:30:00.000Z",
+    "readTime": "5 min read",
+    "featured": false,
+    "tags": [
+      "Health",
+      "Creation Care",
+      "Devotional"
+    ],
+    "category": {
+      "_type": "reference",
+      "_ref": "category-devotional"
+    },
+    "author": {
+      "_type": "reference",
+      "_ref": "author-sr--priya-daniel"
+    }
+  },
+  {
+    "_id": "post-annual-camp-meeting-highlights",
+    "_type": "post",
+    "title": "Annual Camp Meeting Highlights",
+    "slug": {
+      "_type": "slug",
+      "current": "annual-camp-meeting-highlights"
+    },
+    "excerpt": "Reflecting on a weekend of spiritual renewal and fellowship under the canopy of Vellore's evening skies.",
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "This year's Annual Camp Meeting was an unforgettable gathering of faith, fellowship, and spiritual renewal. Over three days, more than two hundred members and guests came together to study the Word, worship together, and strengthen the bonds of our church family.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Highlights from the Weekend",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "The keynote sessions were led by Pastor Abraham Samuel from the Tamil Nadu Conference, whose messages on the theme of \"Anchored in Christ\" resonated deeply with attendees of all ages. His expository approach to the book of Hebrews gave our congregation new tools for navigating life's uncertainties.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "blockquote",
+        "children": [
+          {
+            "_type": "span",
+            "text": "\"We have this hope as an anchor for the soul, firm and secure.\" — Hebrews 6:19",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "The youth programmes, organised by our AY department, included a sunrise prayer hike, a community service project, and an evening of praise and testimony that moved many to tears of joy. Several young people made personal commitments to deeper discipleship.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Looking Ahead",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "The Camp Meeting is not just an event—it is a catalyst. The connections made, the prayers prayed, and the truths learned carry us through the year. We are already planning next year's gathering and invite all members to pray and participate in the planning process.",
+            "marks": []
+          }
+        ]
+      }
+    ],
+    "date": "2023-10-19T18:30:00.000Z",
+    "readTime": "7 min read",
+    "featured": false,
+    "tags": [
+      "Events",
+      "Camp Meeting",
+      "Fellowship"
+    ],
+    "category": {
+      "_type": "reference",
+      "_ref": "category-events"
+    },
+    "author": {
+      "_type": "reference",
+      "_ref": "author-media-team"
+    }
+  },
+  {
+    "_id": "post-the-sabbath-a-sanctuary-in-time",
+    "_type": "post",
+    "title": "The Sabbath: A Sanctuary in Time",
+    "slug": {
+      "_type": "slug",
+      "current": "the-sabbath-a-sanctuary-in-time"
+    },
+    "excerpt": "Understanding the profound peace that comes with the 24-hour respite from the noise of modern life.",
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "In a world that never stops, God ordained a day that does. The Sabbath is not merely a religious obligation — it is a gift. It is a weekly invitation to step off the treadmill of productivity and enter into rest with our Creator.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "The Origin of Sabbath Rest",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Before sin entered the world, before there were laws or commandments, God rested on the seventh day. Genesis 2:2–3 tells us that God \"rested from all his work\" and \"blessed the seventh day and made it holy.\" Sabbath is woven into the very fabric of creation.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "blockquote",
+        "children": [
+          {
+            "_type": "span",
+            "text": "\"Remember the Sabbath day by keeping it holy.\" — Exodus 20:8",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Abraham Heschel, the great Jewish theologian, called the Sabbath \"a palace in time.\" What a beautiful description. While we build palaces of space — homes, churches, cathedrals — God's gift to us is a palace built in time itself, one day in seven that we inhabit together with Him.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Sabbath in Modern Life",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Keeping Sabbath in the 21st century is both more challenging and more necessary than ever. Our devices demand constant attention. Our culture equates busyness with worth. Sabbath is a countercultural act of trust — a declaration that the world will not fall apart if we stop working for 24 hours. That is God's job, not ours.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "We invite you to experience the Sabbath not as a burden of rules but as a breath of fresh air — a day to pray, to play, to rest, to worship, and to be present with the people and the God you love.",
+            "marks": []
+          }
+        ]
+      }
+    ],
+    "date": "2023-10-17T18:30:00.000Z",
+    "readTime": "8 min read",
+    "featured": false,
+    "tags": [
+      "Doctrine",
+      "Sabbath",
+      "Rest"
+    ],
+    "category": {
+      "_type": "reference",
+      "_ref": "category-doctrine"
+    },
+    "author": {
+      "_type": "reference",
+      "_ref": "author-pr--david-solomon"
+    }
+  },
+  {
+    "_id": "post-ay-voices-leading-with-purpose",
+    "_type": "post",
+    "title": "AY Voices: Leading with Purpose",
+    "slug": {
+      "_type": "slug",
+      "current": "ay-voices-leading-with-purpose"
+    },
+    "excerpt": "How our young people are reimagining leadership through the lens of servant-hearted Christ-like love.",
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "The next generation of the church is already here. They are not waiting in the wings — they are on the stage. Our Adventist Youth (AY) department has been a training ground for servant leaders who will carry this church forward with grace and purpose.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "A New Kind of Leadership",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Today's young people in our church are rejecting hierarchical models of leadership in favour of servant leadership modelled on Jesus Himself, who \"did not come to be served, but to serve\" (Matthew 20:28). They are leading with empathy, creativity, and a deep desire to make a difference.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "blockquote",
+        "children": [
+          {
+            "_type": "span",
+            "text": "\"Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity.\" — 1 Timothy 4:12",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "This year, our AY department launched a mentorship programme pairing younger members with experienced church leaders. The results have been remarkable — not just in skill development, but in deepening the bonds between generations in our church family.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Opportunities to Get Involved",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "If you are between 15 and 35, we want to hear your voice. Join us every Friday evening for AY programmes, and look out for leadership training workshops coming this quarter. The church needs your gifts, your energy, and your faith.",
+            "marks": []
+          }
+        ]
+      }
+    ],
+    "date": "2023-10-14T18:30:00.000Z",
+    "readTime": "5 min read",
+    "featured": false,
+    "tags": [
+      "Youth",
+      "Leadership",
+      "AY"
+    ],
+    "category": {
+      "_type": "reference",
+      "_ref": "category-youth"
+    },
+    "author": {
+      "_type": "reference",
+      "_ref": "author-sr--ruth-esther"
+    }
+  },
+  {
+    "_id": "post-compassion-in-action-outreach-updates",
+    "_type": "post",
+    "title": "Compassion in Action: Outreach Updates",
+    "slug": {
+      "_type": "slug",
+      "current": "compassion-in-action-outreach-updates"
+    },
+    "excerpt": "A summary of our recent health camp and community support initiatives across the Vellore district.",
+    "content": [
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "The love of Christ compels us — and it has been compelling our church to serve the Vellore community in tangible, life-changing ways. This past month, our Community Services department organized two significant outreach initiatives that touched hundreds of lives.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Health Camp at Sathuvachari",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "In partnership with local medical professionals from our congregation, we conducted a free health screening camp at Sathuvachari village. Over 180 residents received blood pressure checks, blood sugar tests, and nutritional counselling. Our medical team also distributed health education materials promoting a plant-based lifestyle.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "blockquote",
+        "children": [
+          {
+            "_type": "span",
+            "text": "\"Heal the sick, raise the dead, cleanse those who have leprosy, drive out demons. Freely you have received; freely give.\" — Matthew 10:8",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Food Distribution Drive",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Our Dorcas Society, in collaboration with ADRA India, distributed food packets to 75 families in need across three neighbourhoods near our church. The response from the community was overwhelming — not just in gratitude, but in genuine curiosity about the faith that motivates our service.",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "h2",
+        "children": [
+          {
+            "_type": "span",
+            "text": "How to Get Involved",
+            "marks": []
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "text": "Our next outreach is scheduled for November. We need volunteers, donations, and most importantly, your prayers. Contact the church office or speak to our Community Services coordinator to find out how you can be part of God's work in Vellore.",
+            "marks": []
+          }
+        ]
+      }
+    ],
+    "date": "2023-10-09T18:30:00.000Z",
+    "readTime": "6 min read",
+    "featured": false,
+    "tags": [
+      "Service",
+      "Outreach",
+      "Community"
+    ],
+    "category": {
+      "_type": "reference",
+      "_ref": "category-service"
+    },
+    "author": {
+      "_type": "reference",
+      "_ref": "author-sr--mary-philip"
+    }
+  }
+]

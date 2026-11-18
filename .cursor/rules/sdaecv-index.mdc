@@ -1,0 +1,27 @@
+---
+description: SDAECV project index — minimal always-on context
+alwaysApply: true
+---
+
+# SDAECV index
+
+Church site (SDA English Church Vellore). Next.js 16 App Router, React 19, Tailwind 4, Framer Motion, Lenis.
+
+## Paths
+
+- Tokens: `app/globals.css`
+- Page: `app/page.tsx` + `app/layout.tsx`
+- Sections: `components/` (see scoped rule when editing components)
+- Session scope: `SDAECV/dev-delta.md` — read when user continues work or attaches it
+- Deep docs: `SDAECV/00-index.md` → `architecture/*.md` — **on demand only**
+
+## Commands
+
+`npm run dev` | `build` | `start` | `lint`
+
+## Token discipline
+
+- Prefer `@` specific files over broad exploration
+- Do **not** read `architecture/cms-wordpress.md` or `security.md` for UI-only tasks
+- Phase 1 code has **no WordPress layer** yet; CMS notes are target architecture
+- Update `SDAECV/dev-delta.md` when the user ends a session (if they ask)

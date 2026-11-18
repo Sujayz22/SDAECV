@@ -1,0 +1,17 @@
+---
+description: SDAECV App Router and global styles
+globs: app/**
+alwaysApply: false
+---
+
+# App directory
+
+- `layout.tsx` — fonts (Inter, Plus Jakarta Sans), Material Symbols CDN, metadata
+- `page.tsx` — composes sections; keep as assembly only
+- `globals.css` — `@theme` design tokens; custom utilities and keyframes
+
+## Rules
+
+- Do not move section markup into `page.tsx` — use `components/`
+- New global tokens go in `@theme` in `globals.css`, not scattered hex values
+- Server components by default; sections that need motion/scroll stay in `components/` as client components
