@@ -4,6 +4,7 @@ import QuickConnectWidget from "@/components/QuickConnectWidget";
 import { SanityLive } from "@/lib/sanity/live";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -47,6 +48,7 @@ export default function RootLayout({
         {children}
         <QuickConnectWidget />
         <SanityLive />
+        <SpeedInsights />
       </body>
     </html>
   );
