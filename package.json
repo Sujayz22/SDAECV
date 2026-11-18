@@ -18,8 +18,8 @@
     "next": "16.0.10",
     "next-sanity": "^13.1.1",
     "nodemailer": "^9.0.3",
-    "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
