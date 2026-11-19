@@ -790,7 +790,7 @@ function Closing() {
           </motion.p>
         </div>
         <motion.p variants={fadeUp} custom={3} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="mt-6 font-baskerville text-[14px] tracking-[0.3em] uppercase text-[#7a6d8e]">
-          Sourced by Mr. Gordon E Christo &amp;  Mr. Samuel Vijayakumar · Est. 1947 · Vellore, India
+          Sourced by Dr. Gordon E Christo &amp;  Dr. Samuel Vijayakumar · Est. 1947 · Vellore, India
         </motion.p>
       </div>
     </section>

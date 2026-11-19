@@ -97,7 +97,7 @@ export default function Hero({ headline, subheadline, ctaText, ctaUrl, serviceTi
 
                         {/* Right column — description + CTAs */}
                         <div className="flex flex-col gap-7 lg:max-w-[340px] lg:pb-3 lg:items-end lg:text-right">
-                            <p className="text-white/45 text-[15px] leading-relaxed font-body">
+                            <p className="text-white/90 font-semibold text-[15px] leading-relaxed font-body">
                                 {displaySubheadline}
                             </p>
                             <div className="flex flex-wrap gap-3 lg:justify-end">

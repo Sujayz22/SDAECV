@@ -8,10 +8,11 @@ export interface ServiceTimeSlot {
 
 export const DEFAULT_SERVICE_TIMES: ServiceTimeSlot[] = [
   { label: 'AY Service', time: 'Friday · 7:30 PM', detail: 'Vibrant youth fellowship and spiritual growth.' },
-  { label: 'Sabbath School', time: 'Saturday · 8:45 AM', detail: 'Bible study for all age groups. Interactive discussions.' },
-  { label: 'Divine Service', time: 'Saturday · 10:30 AM', detail: 'Our main worship service. Music, Scripture, and sermon.' },
+  { label: 'Sabbath School', time: 'Saturday · 8:30 AM', detail: 'Bible study for all age groups. Interactive discussions.' },
+  { label: 'Church at Study', time: 'Saturday · 9:15 AM', detail: 'A weekly time of inspiring songs, global mission reports, and special feature talks.' },
+  { label: 'Divine Service', time: 'Saturday · 10:45 AM', detail: 'Our main worship service. Music, Scripture, and sermon.' },
   { label: 'Singing Band/Outreach', time: 'Saturday · 3:30 PM', detail: 'Elevating worship through song and active outreach.' },
-  { label: 'Vespers', time: 'Saturday · 5:00 PM', detail: 'Closing the Sabbath with songs and devotion.' },
+  { label: 'Vespers Service', time: 'Saturday · 5:00 PM', detail: 'Closing the Sabbath with songs and devotion.' },
   { label: 'Prayer Meeting', time: 'Wednesday · 7:00 PM', detail: 'Midweek prayer and intercessory chain.' },
 ];
 
@@ -67,25 +68,28 @@ export function getTimingsSummary(slots: ServiceTimeSlot[] = []) {
 
   const aySlot = findServiceSlot(effectiveSlots, ['ay service', 'ay', 'youth']) || DEFAULT_SERVICE_TIMES[0];
   const ssSlot = findServiceSlot(effectiveSlots, ['sabbath school', 'school']) || DEFAULT_SERVICE_TIMES[1];
-  const dsSlot = findServiceSlot(effectiveSlots, ['divine service', 'divine worship', 'divine', 'worship']) || DEFAULT_SERVICE_TIMES[2];
-  const singingSlot = findServiceSlot(effectiveSlots, ['singing band', 'singing', 'outreach']) || DEFAULT_SERVICE_TIMES[3];
-  const vespersSlot = findServiceSlot(effectiveSlots, ['vespers']) || DEFAULT_SERVICE_TIMES[4];
-  const prayerSlot = findServiceSlot(effectiveSlots, ['prayer meeting', 'prayer']) || DEFAULT_SERVICE_TIMES[5];
+  const studySlot = findServiceSlot(effectiveSlots, ['church at study', 'study']) || DEFAULT_SERVICE_TIMES[2];
+  const dsSlot = findServiceSlot(effectiveSlots, ['divine service', 'divine worship', 'divine', 'worship']) || DEFAULT_SERVICE_TIMES[3];
+  const singingSlot = findServiceSlot(effectiveSlots, ['singing band', 'singing', 'outreach']) || DEFAULT_SERVICE_TIMES[4];
+  const vespersSlot = findServiceSlot(effectiveSlots, ['vespers']) || DEFAULT_SERVICE_TIMES[5];
+  const prayerSlot = findServiceSlot(effectiveSlots, ['prayer meeting', 'prayer']) || DEFAULT_SERVICE_TIMES[6];
 
   const ay = parseServiceTime(aySlot);
   const ss = parseServiceTime(ssSlot);
+  const study = parseServiceTime(studySlot);
   const ds = parseServiceTime(dsSlot);
   const singing = parseServiceTime(singingSlot);
   const vespers = parseServiceTime(vespersSlot);
   const prayer = parseServiceTime(prayerSlot);
 
-  // Hero string e.g. "Friday 7:30 PM · Saturday 8:45 AM"
+  // Hero string e.g. "Friday 7:30 PM · Saturday 8:30 AM"
   const heroString = `${ay.day} ${ay.timeOnly} · ${ss.day} ${ss.timeOnly}`;
 
   return {
     slots: effectiveSlots,
     ay: { slot: aySlot, ...ay },
     sabbathSchool: { slot: ssSlot, ...ss },
+    churchAtStudy: { slot: studySlot, ...study },
     divineService: { slot: dsSlot, ...ds },
     singingBand: { slot: singingSlot, ...singing },
     vespers: { slot: vespersSlot, ...vespers },

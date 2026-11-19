@@ -24,7 +24,7 @@ const PILLARS = [
     {
         num: '03',
         label: 'Serve',
-        desc: 'Use your gifts in Vellore and the world. Through Dorcas, health ministry, and outreach — everyone has a meaningful part.',
+        desc: 'Use your gifts in Vellore and the world. Through Outreach ministry, Singing Band and Health Ministry — everyone has a meaningful part.',
         accent: '#448d21',
         gradient: 'from-[#448d21]/20 to-transparent',
         icon: 'volunteer_activism',
@@ -105,7 +105,7 @@ export default function MissionSection() {
                                 </p>
                             </div>
 
-                            {/* Link */}
+                            {/* Link
                             <div className="mt-10 relative z-10">
                                 <a
                                     href="#"
@@ -115,7 +115,7 @@ export default function MissionSection() {
                                     {p.link}
                                     <span className="material-symbols-outlined text-base">arrow_forward</span>
                                 </a>
-                            </div>
+                            </div> */}
 
                             {/* Bottom accent line */}
                             <div

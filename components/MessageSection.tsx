@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Play, Tv, BookOpen, Volume2 } from 'lucide-react';
+import { Play, Tv, BookOpen, UserPlus } from 'lucide-react';
 import { ServiceTimeSlot, getTimingsSummary } from '@/lib/timings';
 
 interface MessageSectionProps {
@@ -50,7 +50,7 @@ export default function MessageSection({ channelId = '', serviceTimes }: Message
 
   const activeVideoId = liveInfo.videoId || 'jfKfPfyJRdk'; // Fallback video ID
   const rawTitle = liveInfo.title || 'Walking in Faith';
-  
+
   // Clean up title (remove common trailing suffixes like channel names or pipe separators)
   const displayTitle = rawTitle.split(' | ')[0].split(' - ')[0];
 
@@ -69,7 +69,7 @@ export default function MessageSection({ channelId = '', serviceTimes }: Message
 
       <div className="mx-auto max-w-[1440px] px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
-          
+
           {/* Video Column — 7 cols */}
           <div className="lg:col-span-7 relative group">
             <div className="relative aspect-video overflow-hidden rounded-[2.5rem] shadow-[0_60px_120px_-30px_rgba(20,13,35,0.22)] bg-black border border-[#140d23]/5">
@@ -82,7 +82,7 @@ export default function MessageSection({ channelId = '', serviceTimes }: Message
                   allowFullScreen
                 />
               ) : (
-                <div 
+                <div
                   className="relative w-full h-full cursor-pointer"
                   onClick={() => setIsPlayActive(true)}
                 >
@@ -94,7 +94,7 @@ export default function MessageSection({ channelId = '', serviceTimes }: Message
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#140d23]/60 via-[#140d23]/10 to-transparent transition-colors duration-300 group-hover:from-[#140d23]/40" />
-                  
+
                   {/* Play Button Overlay */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="flex size-20 items-center justify-center rounded-full bg-white/15 backdrop-blur-md border border-white/30 transition-all duration-500 group-hover:scale-110 group-hover:bg-[#5b2d9c] group-hover:border-[#5b2d9c] shadow-xl shadow-[#140d23]/30">
@@ -152,22 +152,22 @@ export default function MessageSection({ channelId = '', serviceTimes }: Message
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
-              <button 
+              <button
                 onClick={() => setIsPlayActive(true)}
                 className="group flex h-13 items-center gap-2.5 rounded-full bg-[#5b2d9c] px-8 py-3.5 text-sm font-bold text-white shadow-xl shadow-[#5b2d9c]/30 hover:bg-[#4b2088] hover:-translate-y-0.5 transition-all cursor-pointer font-body"
               >
                 <Play className="size-4 fill-current" />
                 Watch Now
               </button>
-              
-              <a 
+
+              <a
                 href={`https://www.youtube.com/channel/${channelId || 'UC4ZIopIZwN-f9kYzGYmPWbA'}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex h-13 items-center gap-2.5 rounded-full border border-[#140d23]/15 px-8 py-3.5 text-sm font-bold text-[#140d23] hover:border-[#140d23]/30 hover:bg-[#140d23]/[0.04] transition-all cursor-pointer font-body text-center"
               >
-                <Volume2 className="size-4" />
-                Subscribe
+                <UserPlus className="size-4" />
+                Subscribe on YouTube
               </a>
             </div>
 

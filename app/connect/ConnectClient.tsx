@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { ServiceTimeSlot, getTimingsSummary, parseServiceTime } from '@/lib/timings';
+import PrayerWallSection, { SanityPrayerRequest } from '@/components/PrayerWallSection';
 
 /* ── Animation Variants ─────────────────────────────────────────────────── */
 const fadeUp = {
@@ -28,7 +29,7 @@ const clipReveal = {
 const faqs = [
   {
     q: 'What should I wear to church?',
-    a: 'While many choose to wear their "Sabbath best," we warmly welcome you as you are. Our focus is always on the heart, worship, and fellowship — not on outward appearance.',
+    a: 'We warmly encourage you to wear something neat, modest and respectful for a place of worship.',
   },
   {
     q: 'Do you have programs for children and youth?',
@@ -135,15 +136,16 @@ interface ConnectClientProps {
   faqs?: SanityFAQ[];
   ministries?: SanityMinistry[];
   serviceTimes?: ServiceTimeSlot[];
+  prayers?: SanityPrayerRequest[];
 }
 
-export default function ConnectClient({ faqs: propFaqs, ministries: propMinistries, serviceTimes }: ConnectClientProps) {
+export default function ConnectClient({ faqs: propFaqs, ministries: propMinistries, serviceTimes, prayers }: ConnectClientProps) {
   const timings = getTimingsSummary(serviceTimes);
   const resolvedFaqs = propFaqs && propFaqs.length > 0
     ? propFaqs.map(f => ({
-        q: f.question,
-        a: f.answer
-      }))
+      q: f.question,
+      a: f.answer
+    }))
     : faqs;
 
   const uniqueFaqs = resolvedFaqs.filter((faq, idx, self) =>
@@ -152,13 +154,13 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
 
   const resolvedMinistries = propMinistries && propMinistries.length > 0
     ? propMinistries.map((m) => ({
-        id: m.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-        name: m.name,
-        tagline: m.tagline,
-        icon: m.icon,
-        gradient: m.gradient || 'from-[#5b2d9c]/20 to-[#e36520]/20',
-        description: m.description
-      }))
+      id: m.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      name: m.name,
+      tagline: m.tagline,
+      icon: m.icon,
+      gradient: m.gradient || 'from-[#5b2d9c]/20 to-[#e36520]/20',
+      description: m.description
+    }))
     : ministries;
   /* ── Tab state ───────────────────────────────────────────────────────── */
   const [activeTab, setActiveTab] = useState<'inquiries' | 'ministries'>(() => {
@@ -198,6 +200,11 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
     privacy: false,
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submittedData, setSubmittedData] = useState<{
+    name: string;
+    type: string;
+    privacy: boolean;
+  } | null>(null);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -288,6 +295,11 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
       if (!res.ok || !data.success) {
         throw new Error(data.error || 'Failed to submit request. Please try again.');
       }
+      setSubmittedData({
+        name: formData.name,
+        type: formData.type,
+        privacy: formData.privacy,
+      });
       setSubmitted(true);
     } catch (err: any) {
       console.error('Submit error:', err);
@@ -438,9 +450,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
           >
             <button
               onClick={() => setActiveTab('inquiries')}
-              className={`relative z-10 px-8 py-3.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer select-none ${
-                activeTab === 'inquiries' ? 'text-white' : 'text-[#7a6d8e] hover:text-[#140d23]'
-              }`}
+              className={`relative z-10 px-8 py-3.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer select-none ${activeTab === 'inquiries' ? 'text-white' : 'text-[#7a6d8e] hover:text-[#140d23]'
+                }`}
             >
               {activeTab === 'inquiries' && (
                 <motion.div
@@ -453,9 +464,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
             </button>
             <button
               onClick={() => setActiveTab('ministries')}
-              className={`relative z-10 px-8 py-3.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer select-none ${
-                activeTab === 'ministries' ? 'text-white' : 'text-[#7a6d8e] hover:text-[#140d23]'
-              }`}
+              className={`relative z-10 px-8 py-3.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer select-none ${activeTab === 'ministries' ? 'text-white' : 'text-[#7a6d8e] hover:text-[#140d23]'
+                }`}
             >
               {activeTab === 'ministries' && (
                 <motion.div
@@ -502,27 +512,48 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                   {/* Success state */}
                   {submitted ? (
                     <div className="bg-white rounded-3xl border border-[#140d23]/5 p-12 shadow-[0_10px_40px_-10px_rgba(20,13,35,0.08)] flex flex-col items-center text-center gap-6">
-                      <div className="size-20 rounded-full bg-[#5b2d9c]/10 flex items-center justify-center mb-2">
-                        <span className="material-symbols-outlined text-4xl text-[#5b2d9c]">favorite</span>
+                      <div className={`size-20 rounded-full flex items-center justify-center mb-2 ${
+                        submittedData?.type === 'prayer' ? 'bg-[#5b2d9c]/10 text-[#5b2d9c]' : 'bg-[#448d21]/10 text-[#448d21]'
+                      }`}>
+                        <span className="material-symbols-outlined text-4xl">
+                          {submittedData?.type === 'prayer' ? 'volunteer_activism' : 'check_circle'}
+                        </span>
                       </div>
                       <h4
                         className="text-3xl text-[#140d23]"
                         style={{ fontFamily: 'var(--font-newsreader), serif' }}
                       >
-                        We received your message
+                        {submittedData?.type === 'prayer' ? 'Prayer Request Received' : 'We received your message'}
                       </h4>
-                      <p className="text-[#7a6d8e] leading-relaxed max-w-sm">
-                        Thank you, <strong className="text-[#140d23]">{formData.name}</strong>. Our pastoral team will be in prayer for you and will reach out if needed. God bless you.
-                      </p>
+
+                      {submittedData?.type === 'prayer' ? (
+                        <div className="max-w-md flex flex-col gap-3">
+                          <p className="text-[#7a6d8e] leading-relaxed">
+                            Thank you, <strong className="text-[#140d23]">{submittedData?.name || formData.name}</strong>. Our pastoral team will be in prayer for you and will reach out if needed. God bless you.
+                          </p>
+                          {submittedData?.privacy && (
+                            <p className="text-xs text-[#5b2d9c] font-medium bg-[#5b2d9c]/6 py-2.5 px-4 rounded-xl border border-[#5b2d9c]/15 inline-flex items-center justify-center gap-1.5">
+                              <span className="material-symbols-outlined text-[15px]">lock</span>
+                              Your prayer request is kept <strong className="text-[#140d23]">private</strong> with pastoral staff only.
+                            </p>
+                          )}
+                        </div>
+                      ) : (
+                        <p className="text-[#7a6d8e] leading-relaxed max-w-sm">
+                          Thank you, <strong className="text-[#140d23]">{submittedData?.name || formData.name}</strong>. We have received your inquiry. Our church team will review your message and reach out to you shortly. God bless you.
+                        </p>
+                      )}
+
                       <button
                         onClick={() => {
                           setSubmitted(false);
+                          setSubmittedData(null);
                           setFormData({ name: '', email: '', phone: '', type: '', message: '', privacy: false });
                         }}
                         className="mt-2 text-[#5b2d9c] font-bold text-sm hover:text-[#e36520] transition-colors flex items-center gap-1.5 cursor-pointer"
                       >
                         <span className="material-symbols-outlined text-sm">refresh</span>
-                        Submit another request
+                        {submittedData?.type === 'prayer' ? 'Submit another prayer request' : 'Send another message'}
                       </button>
                     </div>
                   ) : (
@@ -557,9 +588,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                             placeholder="Full name"
                             value={formData.name}
                             onChange={handleChange}
-                            className={`w-full rounded-xl border px-4 py-3.5 text-[#140d23] bg-[#f8f4ef] placeholder:text-[#7a6d8e]/40 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#5b2d9c]/30 transition-all duration-200 ${
-                              errors.name ? 'border-red-400 bg-red-50/50' : 'border-[#140d23]/8 focus:border-[#5b2d9c]/30'
-                            }`}
+                            className={`w-full rounded-xl border px-4 py-3.5 text-[#140d23] bg-[#f8f4ef] placeholder:text-[#7a6d8e]/40 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#5b2d9c]/30 transition-all duration-200 ${errors.name ? 'border-red-400 bg-red-50/50' : 'border-[#140d23]/8 focus:border-[#5b2d9c]/30'
+                              }`}
                           />
                           {errors.name && <p className="text-red-500 text-xs font-medium">{errors.name}</p>}
                         </div>
@@ -578,9 +608,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                             placeholder="email@example.com"
                             value={formData.email}
                             onChange={handleChange}
-                            className={`w-full rounded-xl border px-4 py-3.5 text-[#140d23] bg-[#f8f4ef] placeholder:text-[#7a6d8e]/40 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#5b2d9c]/30 transition-all duration-200 ${
-                              errors.email ? 'border-red-400 bg-red-50/50' : 'border-[#140d23]/8 focus:border-[#5b2d9c]/30'
-                            }`}
+                            className={`w-full rounded-xl border px-4 py-3.5 text-[#140d23] bg-[#f8f4ef] placeholder:text-[#7a6d8e]/40 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#5b2d9c]/30 transition-all duration-200 ${errors.email ? 'border-red-400 bg-red-50/50' : 'border-[#140d23]/8 focus:border-[#5b2d9c]/30'
+                              }`}
                           />
                           {errors.email && <p className="text-red-500 text-xs font-medium">{errors.email}</p>}
                         </div>
@@ -618,9 +647,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                             name="type"
                             value={formData.type}
                             onChange={handleChange}
-                            className={`w-full rounded-xl border px-4 py-3.5 text-[#140d23] bg-[#f8f4ef] text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#5b2d9c]/30 transition-all duration-200 appearance-none cursor-pointer ${
-                              errors.type ? 'border-red-400 bg-red-50/50' : 'border-[#140d23]/8 focus:border-[#5b2d9c]/30'
-                            } ${!formData.type ? 'text-[#7a6d8e]/50' : ''}`}
+                            className={`w-full rounded-xl border px-4 py-3.5 text-[#140d23] bg-[#f8f4ef] text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#5b2d9c]/30 transition-all duration-200 appearance-none cursor-pointer ${errors.type ? 'border-red-400 bg-red-50/50' : 'border-[#140d23]/8 focus:border-[#5b2d9c]/30'
+                              } ${!formData.type ? 'text-[#7a6d8e]/50' : ''}`}
                           >
                             {connectionTypes.map(({ value, label, disabled }) => (
                               <option key={value} value={value} disabled={disabled}>
@@ -647,9 +675,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                           placeholder="Share your prayer request, question, or how we can serve you…"
                           value={formData.message}
                           onChange={handleChange}
-                          className={`w-full rounded-xl border px-4 py-3.5 text-[#140d23] bg-[#f8f4ef] placeholder:text-[#7a6d8e]/40 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#5b2d9c]/30 transition-all duration-200 resize-none ${
-                            errors.message ? 'border-red-400 bg-red-50/50' : 'border-[#140d23]/8 focus:border-[#5b2d9c]/30'
-                          }`}
+                          className={`w-full rounded-xl border px-4 py-3.5 text-[#140d23] bg-[#f8f4ef] placeholder:text-[#7a6d8e]/40 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#5b2d9c]/30 transition-all duration-200 resize-none ${errors.message ? 'border-red-400 bg-red-50/50' : 'border-[#140d23]/8 focus:border-[#5b2d9c]/30'
+                            }`}
                         />
                         {errors.message && <p className="text-red-500 text-xs font-medium">{errors.message}</p>}
                       </div>
@@ -658,9 +685,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-2 relative z-10">
                         <label className="flex items-start gap-3 cursor-pointer group select-none">
                           <span
-                            className={`relative mt-0.5 size-5 flex-shrink-0 rounded-md border-2 flex items-center justify-center transition-all duration-200 ${
-                              formData.privacy ? 'bg-[#5b2d9c] border-[#5b2d9c]' : 'border-[#140d23]/20 bg-[#f8f4ef] group-hover:border-[#5b2d9c]/40'
-                            }`}
+                            className={`relative mt-0.5 size-5 flex-shrink-0 rounded-md border-2 flex items-center justify-center transition-all duration-200 ${formData.privacy ? 'bg-[#5b2d9c] border-[#5b2d9c]' : 'border-[#140d23]/20 bg-[#f8f4ef] group-hover:border-[#5b2d9c]/40'
+                              }`}
                           >
                             {formData.privacy && (
                               <span className="material-symbols-outlined text-white text-[14px] font-black">
@@ -677,7 +703,11 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                             />
                           </span>
                           <span className="text-xs text-[#7a6d8e] leading-relaxed">
-                            Keep my prayer request <strong className="text-[#140d23]">private</strong> — share only with pastoral staff.
+                            {formData.type === 'prayer' || !formData.type ? (
+                              <>Keep my prayer request <strong className="text-[#140d23]">private</strong> — share only with pastoral staff.</>
+                            ) : (
+                              <>Keep this inquiry <strong className="text-[#140d23]">private</strong> — share only with pastoral staff.</>
+                            )}
                           </span>
                         </label>
 
@@ -735,7 +765,7 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                           );
                         })}
                       </div>
-                      <p className="text-xs text-[#7a6d8e] mt-3">Every Saturday · SDAECV, Vellore</p>
+                      <p className="text-xs text-[#7a6d8e] mt-3">Every Sabbath · SDAECV, Vellore</p>
                     </div>
                   </div>
 
@@ -887,6 +917,9 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
         </div>
       </section>
 
+      {/* ── Prayer Wall Section ───────────────────────────────────── */}
+      <PrayerWallSection prayers={prayers} ctaHref="#connect-form" />
+
       {/* ═══════════════════════════════════════════════════════════════
           FAQ SECTION (Styled with matching Accordion animation styles)
       ════════════════════════════════════════════════════════════════ */}
@@ -948,9 +981,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
               return (
                 <div
                   key={i}
-                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    isOpen ? 'border-[#5b2d9c]/20 bg-[#f8f4ef]' : 'border-[#140d23]/6 bg-white hover:border-[#5b2d9c]/15'
-                  }`}
+                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen ? 'border-[#5b2d9c]/20 bg-[#f8f4ef]' : 'border-[#140d23]/6 bg-white hover:border-[#5b2d9c]/15'
+                    }`}
                 >
                   <button
                     id={`faq-btn-${i}`}
@@ -1036,7 +1068,7 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                 Plan a Visit
               </Link>
               <Link
-                href="/live"
+                href="https://www.youtube.com/@SDAEnglishChurchVellore/streams" target='_blank'
                 className="flex items-center justify-center gap-2 bg-transparent border-2 border-[#140d23]/10 text-[#140d23] hover:border-[#5b2d9c] hover:text-[#5b2d9c] font-bold py-4 px-10 rounded-full transition-all hover:-translate-y-1 cursor-pointer font-body"
               >
                 Join Online

@@ -33,6 +33,22 @@ export default async function ConnectPage() {
     }`
   });
   const ministries = (ministriesResult?.data as any[]) || [];
+
+  // Fetch active and answered prayer requests for the prayer wall (pinned first)
+  const prayersResult = await sanityFetch({
+    query: `*[_type == "prayerRequest" && status in ["active", "answered"]] | order(pinned desc, _createdAt desc)[0...12]{
+      _id,
+      name,
+      date,
+      request,
+      answer,
+      status,
+      likes,
+      pinned
+    }`
+  });
+  const prayers = (prayersResult?.data as any[]) || [];
+
   const serviceTimes = await getServiceTimes();
 
   return (
@@ -42,6 +58,7 @@ export default async function ConnectPage() {
         <ConnectClient
           faqs={faqs}
           ministries={ministries}
+          prayers={prayers}
           serviceTimes={serviceTimes}
         />
       </div>

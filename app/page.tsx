@@ -70,14 +70,17 @@ export default async function Home() {
   });
   const events = (eventsResult?.data as any[]) || [];
 
-  // Fetch prayer requests
+  // Fetch prayer requests (pinned first, both active & answered)
   const prayersResult = await sanityFetch({
-    query: `*[_type == "prayerRequest" && status == "active"] | order(_createdAt desc)[0...8]{
+    query: `*[_type == "prayerRequest" && status in ["active", "answered"]] | order(pinned desc, _createdAt desc)[0...12]{
       _id,
       name,
       date,
       request,
-      status
+      answer,
+      status,
+      likes,
+      pinned
     }`
   });
   const prayers = (prayersResult?.data as any[]) || [];

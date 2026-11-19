@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ServiceTimeSlot, getTimingsSummary, parseServiceTime } from '@/lib/timings';
+import { ServiceTimeSlot, getTimingsSummary, parseServiceTime, findServiceSlot } from '@/lib/timings';
 import {
   motion,
   useScroll,
@@ -54,7 +54,7 @@ const EXPECT_CARDS = [
     step: '02',
     title: 'Worship',
     color: '#5b2d9c',
-    body: 'Our service blends traditional hymns with contemporary praise. Expect Scripture readings, a thoughtful sermon, and a warm community atmosphere. The whole service runs about 90 minutes.',
+    body: 'Our service blends traditional hymns with contemporary praise. Expect Scripture readings, a thoughtful sermon, and a warm community atmosphere.',
   },
   {
     icon: 'restaurant',
@@ -68,13 +68,19 @@ const EXPECT_CARDS = [
 const SCHEDULE = [
   {
     label: 'Sabbath School',
-    time: '8:45 AM',
+    time: '8:30 AM',
     detail: 'Bible study for all age groups. Interactive discussions, a deeply welcoming environment.',
     icon: 'book_4',
   },
   {
-    label: 'Divine Worship',
-    time: '10:30 AM',
+    label: 'Church at Study',
+    time: '9:15 AM',
+    detail: 'A weekly time of inspiring songs, global mission reports, and special feature talks.',
+    icon: 'menu_book',
+  },
+  {
+    label: 'Divine Service',
+    time: '10:45 AM',
     detail: 'Our main worship service. Music, Scripture, and a sermon centred on the Gospel.',
     icon: 'church',
   },
@@ -191,7 +197,7 @@ function HeroSection({ timings }: { timings: ReturnType<typeof getTimingsSummary
               transition={{ duration: 0.9, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col gap-7 lg:max-w-[360px] lg:pb-3 lg:items-end lg:text-right"
             >
-              <p className="text-white/50 text-[15px] leading-relaxed font-body">
+              <p className="text-white/90 text-[15px] leading-relaxed font-body">
                 Whatever your story, wherever you&apos;ve been — there is a seat for you at our Church every Sabbath.
               </p>
               <div className="flex flex-wrap gap-3 lg:justify-end">
@@ -371,11 +377,11 @@ function ScheduleSection({ schedule }: { schedule: any[] }) {
                 style={{ fontFamily: 'var(--font-newsreader), serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 400 }}
               >
                 Join Us<br />
-                <span className="font-light italic text-white/20">This Sabbath</span>
+                <span className="font-light italic text-white/60">This Sabbath</span>
               </motion.h2>
             </div>
 
-            <motion.p variants={fadeUp} custom={3} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="text-white/40 text-[14px] leading-[1.9] font-body mb-10">
+            <motion.p variants={fadeUp} custom={3} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="text-white/60 text-[14px] leading-[1.9] font-body mb-10">
               We gather every Saturday morning. Whether you&apos;re early for Sabbath School or joining us for the main service — you are exactly on time.
             </motion.p>
 
@@ -407,14 +413,14 @@ function ScheduleSection({ schedule }: { schedule: any[] }) {
                   </div>
                   <span
                     className="font-black tracking-[-0.02em]"
-                    style={{ fontFamily: 'var(--font-newsreader), serif', fontSize: '1.75rem', color: 'rgba(255,255,255,0.15)' }}
+                    style={{ fontFamily: 'var(--font-newsreader), serif', fontSize: '1.75rem', color: 'rgba(243, 241, 241, 0.55)' }}
                   >
                     {item.time}
                   </span>
                 </div>
 
                 <p className="text-white font-semibold font-body text-[13px] tracking-wide uppercase mb-2">{item.label}</p>
-                <p className="text-white/35 text-[13px] leading-relaxed font-body">{item.detail}</p>
+                <p className="text-white/65 text-[13px] leading-relaxed font-body">{item.detail}</p>
               </motion.div>
             ))}
           </div>
@@ -752,6 +758,7 @@ interface ScheduleSlot {
   label: string;
   time: string;
   detail?: string;
+  icon?: string;
 }
 
 interface FAQItemType {
@@ -800,25 +807,62 @@ export default function VisitClient({
     })
     : EXPECT_CARDS;
 
+  // Dynamically synchronize card times with central church service times
+  const resolveCardTime = (itemLabel: string, rawTime: string) => {
+    const l = itemLabel.toLowerCase();
+    if (l.includes('school')) return timings.sabbathSchool.timeOnly || rawTime;
+    if (l.includes('study')) return timings.churchAtStudy.timeOnly || rawTime;
+    if (l.includes('divine') || l.includes('worship')) return timings.divineService.timeOnly || rawTime;
+
+    const matchedSlot = findServiceSlot(timings.slots, [itemLabel]);
+    if (matchedSlot) {
+      return parseServiceTime(matchedSlot).timeOnly || rawTime;
+    }
+    return rawTime;
+  };
+
   const getScheduleIcon = (label: string, index: number) => {
     const l = label.toLowerCase();
     if (l.includes('school')) return 'book_4';
+    if (l.includes('study')) return 'menu_book';
     if (l.includes('worship') || l.includes('divine')) return 'church';
     if (l.includes('stream') || l.includes('online')) return 'live_tv';
     if (l.includes('youth') || l.includes('children') || l.includes('program')) return 'family_restroom';
+    if (l.includes('sing') || l.includes('music')) return 'music_note';
 
-    const icons = ['book_4', 'church', 'live_tv', 'family_restroom'];
+    const icons = ['book_4', 'menu_book', 'church', 'live_tv', 'family_restroom'];
     return icons[index % icons.length];
   };
 
-  const resolvedSchedule = propSchedule && propSchedule.length > 0
-    ? propSchedule.map((s, idx) => ({
-      label: s.label,
-      time: s.time,
-      detail: s.detail || '',
-      icon: getScheduleIcon(s.label, idx)
-    }))
-    : SCHEDULE;
+  let baseSchedule: ScheduleSlot[] = propSchedule && propSchedule.length > 0 ? propSchedule : SCHEDULE;
+
+  // If Church at Study is configured in church service times but not in visit schedule cards, include it
+  const hasStudy = baseSchedule.some(s => s.label.toLowerCase().includes('study'));
+  if (!hasStudy && timings.churchAtStudy.timeOnly) {
+    const ssIndex = baseSchedule.findIndex(s => s.label.toLowerCase().includes('school'));
+    const studyCard: ScheduleSlot = {
+      label: timings.churchAtStudy.slot.label || 'Church at Study',
+      time: timings.churchAtStudy.timeOnly,
+      detail: timings.churchAtStudy.slot.detail || 'A weekly time of inspiring songs, global mission reports, and special feature talks.',
+      icon: 'menu_book',
+    };
+    if (ssIndex !== -1) {
+      baseSchedule = [
+        ...baseSchedule.slice(0, ssIndex + 1),
+        studyCard,
+        ...baseSchedule.slice(ssIndex + 1),
+      ];
+    } else {
+      baseSchedule = [studyCard, ...baseSchedule];
+    }
+  }
+
+  const resolvedSchedule = baseSchedule.map((s, idx) => ({
+    label: s.label,
+    time: resolveCardTime(s.label, s.time),
+    detail: s.detail || '',
+    icon: s.icon || getScheduleIcon(s.label, idx)
+  }));
 
   const resolvedFaqs = propFaqs && propFaqs.length > 0
     ? propFaqs.map(f => ({

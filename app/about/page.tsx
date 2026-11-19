@@ -116,9 +116,9 @@ export default async function AboutPage() {
   // Map beliefs
   const beliefs = aboutSettings?.doctrinalBeliefs && aboutSettings.doctrinalBeliefs.length > 0
     ? aboutSettings.doctrinalBeliefs.map((b: any) => ({
-        title: b.title,
-        body: b.body,
-      }))
+      title: b.title,
+      body: b.body,
+    }))
     : FALLBACK_BELIEFS;
 
   return (
@@ -381,7 +381,7 @@ export default async function AboutPage() {
                 <span className="material-symbols-outlined text-sm">place</span>
               </Link>
               <Link
-                href="/live"
+                href="https://www.youtube.com/@SDAEnglishChurchVellore/streams" target='_blank'
                 className="w-full sm:w-auto flex items-center justify-center gap-2 border-2 border-[#0c0818]/12 text-[#0c0818] font-bold py-4 px-10 rounded-full text-sm hover:border-[#5b2d9c] hover:text-[#5b2d9c] transition-all duration-300 hover:-translate-y-0.5"
               >
                 Join Online

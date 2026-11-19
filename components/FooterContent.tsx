@@ -16,8 +16,8 @@ const NAV_COLUMNS = [
         title: 'Ministry',
         links: [
             { label: 'Youth (AY)', href: '/connect' },
-            { label: 'Sabbath School', href: '/connect' },
-            { label: 'Dorcas Society', href: '/connect' },
+            { label: 'Singing Band', href: '/connect' },
+            { label: 'Outreach Ministry', href: '/connect' },
             { label: 'Health Ministry', href: '/connect' },
         ],
     },
