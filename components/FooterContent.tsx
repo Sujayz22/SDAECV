@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ServiceTimeSlot, getTimingsSummary } from '@/lib/timings';
 
 const NAV_COLUMNS = [
     {
@@ -40,7 +41,9 @@ const NAV_COLUMNS = [
     },
 ];
 
-export default function FooterContent() {
+export default function FooterContent({ serviceTimes }: { serviceTimes?: ServiceTimeSlot[] }) {
+    const timings = getTimingsSummary(serviceTimes);
+
     return (
         <div className="bg-[#140d23] text-white flex flex-col w-full">
 
@@ -94,9 +97,9 @@ export default function FooterContent() {
                         {/* Service times — 2×2 grid, tighter on mobile */}
                         <div className="grid grid-cols-2 gap-x-6 sm:gap-x-10 gap-y-4 sm:gap-y-5">
                             {[
-                                { label: 'AY Service', line1: 'Friday', line2: '7:30 PM' },
+                                { label: 'AY Service', line1: timings.ay.day, line2: timings.ay.timeOnly },
                                 { label: 'Online Service', line1: 'YouTube Live', line2: 'Every Sabbath' },
-                                { label: 'Sabbath School', line1: 'Saturday', line2: '8:45 AM' },
+                                { label: 'Sabbath School', line1: timings.sabbathSchool.day, line2: timings.sabbathSchool.timeOnly },
                                 { label: 'Location', line1: 'Vellore', line2: 'Tamil Nadu, India' },
                             ].map((item) => (
                                 <div key={item.label}>

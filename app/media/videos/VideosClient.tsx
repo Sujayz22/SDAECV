@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Search, X, Calendar, Clock, Tv, Volume2, Sparkles } from 'lucide-react';
+import { ServiceTimeSlot, getTimingsSummary } from '@/lib/timings';
 
 /* ── Types & Interfaces ─────────────────────────────────────────────────── */
 interface Video {
@@ -236,9 +237,11 @@ interface SanitySermonVideo {
 interface VideosClientProps {
   channelId: string;
   videos?: SanitySermonVideo[];
+  serviceTimes?: ServiceTimeSlot[];
 }
 
-export default function VideosClient({ channelId, videos: propVideos }: VideosClientProps) {
+export default function VideosClient({ channelId, videos: propVideos, serviceTimes }: VideosClientProps) {
+  const timings = getTimingsSummary(serviceTimes);
   const [activeTab, setActiveTab] = useState<'all' | 'graceful-giants' | 'sing-wednesdays'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeVideo, setActiveVideo] = useState<Video | null>(null);
@@ -386,7 +389,7 @@ export default function VideosClient({ channelId, videos: propVideos }: VideosCl
                 </h2>
 
                 <p className="text-white/60 text-sm leading-relaxed mb-6 max-w-xl">
-                  Join us online every Friday evening at 7:30 PM for AY Service, and Saturday (Sabbath) morning starting at 8:45 AM for Sabbath School and 10:30 AM for Divine Worship, special praise reports, and community announcements. Tune in live or replay our latest broadcast.
+                  Join us online every {timings.ay.day} evening at {timings.ay.timeOnly} for AY Service, and Saturday (Sabbath) morning starting at {timings.sabbathSchool.timeOnly} for Sabbath School and {timings.divineService.timeOnly} for Divine Worship, special praise reports, and community announcements. Tune in live or replay our latest broadcast.
                 </p>
 
                 <div className="flex flex-wrap gap-4 text-xs text-white/50 mb-8 border-b border-white/10 pb-6">

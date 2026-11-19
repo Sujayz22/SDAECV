@@ -3,12 +3,15 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Play, Tv, BookOpen, Volume2 } from 'lucide-react';
+import { ServiceTimeSlot, getTimingsSummary } from '@/lib/timings';
 
 interface MessageSectionProps {
   channelId?: string;
+  serviceTimes?: ServiceTimeSlot[];
 }
 
-export default function MessageSection({ channelId = '' }: MessageSectionProps) {
+export default function MessageSection({ channelId = '', serviceTimes }: MessageSectionProps) {
+  const timings = getTimingsSummary(serviceTimes);
   const [liveInfo, setLiveInfo] = useState<{
     isLive: boolean;
     videoId: string | null;
@@ -172,12 +175,12 @@ export default function MessageSection({ channelId = '' }: MessageSectionProps) 
             <div className="flex flex-wrap gap-x-8 gap-y-4 pt-6 border-t border-[#140d23]/8">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#5b2d9c] font-body">AY Service</p>
-                <p className="text-lg font-bold font-display text-[#140d23] mt-0.5">Friday, 7:30 PM (IST)</p>
+                <p className="text-lg font-bold font-display text-[#140d23] mt-0.5">{timings.ay.day}, {timings.ay.timeOnly} (IST)</p>
               </div>
               <div className="hidden sm:block w-px h-8 self-center bg-[#140d23]/10" />
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#5b2d9c] font-body">Divine Worship</p>
-                <p className="text-lg font-bold font-display text-[#140d23] mt-0.5">Saturday, 10:30 AM (IST)</p>
+                <p className="text-lg font-bold font-display text-[#140d23] mt-0.5">{timings.divineService.day}, {timings.divineService.timeOnly} (IST)</p>
               </div>
             </div>
           </div>

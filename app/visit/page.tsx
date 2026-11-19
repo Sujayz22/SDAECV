@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
 import VisitClient from './VisitClient';
 import { sanityFetch } from '@/lib/sanity/live';
+import { getServiceTimes } from '@/lib/sanity/timings';
 
 export const metadata: Metadata = {
   title: 'Plan Your Visit — SDAECV | Seventh-day Adventist English Church, Vellore',
@@ -30,6 +31,9 @@ export default async function VisitPage() {
   });
   const faqs = (faqsResult?.data as any[]) || [];
 
+  // Fetch church service times for 100% consistency across pages
+  const serviceTimes = await getServiceTimes();
+
   return (
     <SmoothScroll>
       <div className="relative z-10 bg-[#f8f4ef]">
@@ -38,6 +42,7 @@ export default async function VisitPage() {
           expectSteps={visitSettings?.expectSteps}
           schedule={visitSettings?.schedule}
           faqs={faqs}
+          serviceTimes={serviceTimes}
         />
       </div>
       <Footer />

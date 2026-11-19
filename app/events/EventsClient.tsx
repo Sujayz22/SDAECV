@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import AddToCalendar from '@/components/AddToCalendar';
 import type { CalendarEvent } from '@/lib/calendar';
+import { ServiceTimeSlot, getTimingsSummary } from '@/lib/timings';
 
 /* ── Types ──────────────────────────────────────────────────────────────── */
 type Category = 'All' | 'Worship' | 'Community' | 'Kids & Youth' | 'Outreach' | 'Study';
@@ -214,10 +215,12 @@ interface SanityEvent {
 
 interface EventsClientProps {
   events?: SanityEvent[];
+  serviceTimes?: ServiceTimeSlot[];
 }
 
 /* ── Component ──────────────────────────────────────────────────────────── */
-export default function EventsClient({ events: propEvents }: EventsClientProps) {
+export default function EventsClient({ events: propEvents, serviceTimes }: EventsClientProps) {
+  const timings = getTimingsSummary(serviceTimes);
   const today = new Date();
   const [viewMonth, setViewMonth] = useState(today.getMonth()); // 0-based
   const [viewYear, setViewYear] = useState(today.getFullYear());
@@ -370,7 +373,7 @@ export default function EventsClient({ events: propEvents }: EventsClientProps) 
               </h3>
               <p className="text-[#7a6d8e] text-sm flex items-center gap-1 mt-0.5">
                 <span className="material-symbols-outlined text-[16px]">location_on</span>
-                Main Sanctuary · Sabbath School 8:45 AM · Service 10:30 AM
+                Main Sanctuary · Sabbath School {timings.sabbathSchool.timeOnly} · Service {timings.divineService.timeOnly}
               </p>
             </div>
           </div>
@@ -868,7 +871,7 @@ export default function EventsClient({ events: propEvents }: EventsClientProps) 
                     Sabbath Services
                   </h3>
                   <p className="text-white/50 text-sm mt-2 leading-relaxed">
-                    Sabbath School 8:45 AM · Divine Service 10:30 AM
+                    Sabbath School {timings.sabbathSchool.timeOnly} · Divine Service {timings.divineService.timeOnly}
                   </p>
                 </div>
                 <div className="flex items-center justify-between mt-6">

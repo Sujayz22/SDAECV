@@ -2,16 +2,19 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { ServiceTimeSlot, getTimingsSummary } from '@/lib/timings';
 
 interface HeroProps {
     headline?: string;
     subheadline?: string;
     ctaText?: string;
     ctaUrl?: string;
+    serviceTimes?: ServiceTimeSlot[];
 }
 
-export default function Hero({ headline, subheadline, ctaText, ctaUrl }: HeroProps) {
+export default function Hero({ headline, subheadline, ctaText, ctaUrl, serviceTimes }: HeroProps) {
     const videoRef = useRef<HTMLDivElement>(null);
+    const timings = getTimingsSummary(serviceTimes);
 
     useEffect(() => {
         const el = videoRef.current;
@@ -101,7 +104,7 @@ export default function Hero({ headline, subheadline, ctaText, ctaUrl }: HeroPro
                                 <Link href={displayCtaUrl} className="group relative overflow-hidden bg-[#e36520] hover:bg-[#c9571a] text-white px-8 py-3.5 rounded-full text-sm font-bold tracking-wider transition-all duration-300 hover:-translate-y-0.5 font-body cursor-pointer shadow-xl shadow-[#e36520]/20">
                                     <span className="relative z-10">{displayCtaText}</span>
                                 </Link>
-                                <Link href="/live" className="border border-white/20 text-white px-8 py-3.5 rounded-full text-sm font-bold tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm font-body cursor-pointer">
+                                <Link href="https://www.youtube.com/@SDAEnglishChurchVellore/streams" target='_blank' className="border border-white/20 text-white px-8 py-3.5 rounded-full text-sm font-bold tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm font-body cursor-pointer">
                                     Watch Live
                                 </Link>
                             </div>
@@ -113,17 +116,17 @@ export default function Hero({ headline, subheadline, ctaText, ctaUrl }: HeroPro
                         <div className="flex items-center gap-6 md:gap-10 flex-wrap">
                             <div>
                                 <p className="text-[#e36520] text-[9px] font-black uppercase tracking-[0.4em] mb-1 font-body">Sabbath Service</p>
-                                <p className="text-white text-sm font-semibold font-body">Saturday · 9 &amp; 11 AM</p>
+                                <p className="text-white text-sm font-semibold font-body">{timings.heroString}</p>
                             </div>
                             <div className="w-px h-6 bg-white/10" />
                             <div>
-                                <p className="text-[#e36520] text-[9px] font-black uppercase tracking-[0.4em] mb-1 font-body">Online</p>
-                                <p className="text-white text-sm font-semibold font-body">8:45 AM</p>
+                                <p className="text-[#e36520] text-[9px] font-black uppercase tracking-[0.4em] mb-1 font-body">Online on</p>
+                                <p className="text-white text-sm font-semibold font-body">Youtube</p>
                             </div>
                             <div className="w-px h-6 bg-white/10 hidden md:block" />
                             <div>
-                                <p className="text-[#e36520] text-[9px] font-black uppercase tracking-[0.4em] mb-1 font-body">Sabbath School</p>
-                                <p className="text-white text-sm font-semibold font-body">9:30 AM</p>
+                                <p className="text-[#e36520] text-[9px] font-black uppercase tracking-[0.4em] mb-1 font-body">CHURCH</p>
+                                <p className="text-white text-sm font-semibold font-body">Online | In-Person</p>
                             </div>
                             <div className="w-px h-6 bg-white/10 hidden lg:block" />
                             <div className="hidden lg:block">

@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
 import ConnectClient from './ConnectClient';
 import { sanityFetch } from '@/lib/sanity/live';
+import { getServiceTimes } from '@/lib/sanity/timings';
 
 export const metadata: Metadata = {
   title: 'Connect & Prayer Requests — SDAECV | Seventh Day Adventist English Church, Vellore',
@@ -32,6 +33,7 @@ export default async function ConnectPage() {
     }`
   });
   const ministries = (ministriesResult?.data as any[]) || [];
+  const serviceTimes = await getServiceTimes();
 
   return (
     <SmoothScroll>
@@ -40,6 +42,7 @@ export default async function ConnectPage() {
         <ConnectClient
           faqs={faqs}
           ministries={ministries}
+          serviceTimes={serviceTimes}
         />
       </div>
       <Footer />

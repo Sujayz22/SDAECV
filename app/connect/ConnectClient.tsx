@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { ServiceTimeSlot, getTimingsSummary, parseServiceTime } from '@/lib/timings';
 
 /* ── Animation Variants ─────────────────────────────────────────────────── */
 const fadeUp = {
@@ -133,9 +134,11 @@ interface SanityMinistry {
 interface ConnectClientProps {
   faqs?: SanityFAQ[];
   ministries?: SanityMinistry[];
+  serviceTimes?: ServiceTimeSlot[];
 }
 
-export default function ConnectClient({ faqs: propFaqs, ministries: propMinistries }: ConnectClientProps) {
+export default function ConnectClient({ faqs: propFaqs, ministries: propMinistries, serviceTimes }: ConnectClientProps) {
+  const timings = getTimingsSummary(serviceTimes);
   const resolvedFaqs = propFaqs && propFaqs.length > 0
     ? propFaqs.map(f => ({
         q: f.question,
@@ -719,26 +722,18 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                         Worship Schedule
                       </h4>
                       <div className="flex flex-col gap-1.5">
-                        <p className="text-sm text-[#140d23]">
-                          <span className="font-semibold">AY Service:</span> <span className="text-[#448d21] font-bold">7:30 PM</span>
-                          <span className="text-[#7a6d8e] text-xs ml-1">(Friday)</span>
-                        </p>
-                        <p className="text-sm text-[#140d23]">
-                          <span className="font-semibold">Sabbath School:</span> <span className="text-[#5b2d9c] font-bold">8:45 AM</span>
-                          <span className="text-[#7a6d8e] text-xs ml-1">(Saturday)</span>
-                        </p>
-                        <p className="text-sm text-[#140d23]">
-                          <span className="font-semibold">Divine Worship:</span> <span className="text-[#e36520] font-bold">10:30 AM</span>
-                          <span className="text-[#7a6d8e] text-xs ml-1">(Saturday)</span>
-                        </p>
-                        <p className="text-sm text-[#140d23]">
-                          <span className="font-semibold">Singing Band/Outreach:</span> <span className="text-[#3e8391] font-bold">3:30 PM</span>
-                          <span className="text-[#7a6d8e] text-xs ml-1">(Saturday)</span>
-                        </p>
-                        <p className="text-sm text-[#140d23]">
-                          <span className="font-semibold">Vespers:</span> <span className="text-[#2f557f] font-bold">5:00 PM</span>
-                          <span className="text-[#7a6d8e] text-xs ml-1">(Saturday)</span>
-                        </p>
+                        {timings.slots.map((slot, index) => {
+                          const p = parseServiceTime(slot);
+                          const colors = ['#448d21', '#5b2d9c', '#e36520', '#3e8391', '#2f557f', '#7a6d8e'];
+                          const accent = colors[index % colors.length];
+                          return (
+                            <p key={slot.label} className="text-sm text-[#140d23]">
+                              <span className="font-semibold">{slot.label}:</span>{' '}
+                              <span className="font-bold" style={{ color: accent }}>{p.timeOnly}</span>
+                              <span className="text-[#7a6d8e] text-xs ml-1">({p.day})</span>
+                            </p>
+                          );
+                        })}
                       </div>
                       <p className="text-xs text-[#7a6d8e] mt-3">Every Saturday · SDAECV, Vellore</p>
                     </div>

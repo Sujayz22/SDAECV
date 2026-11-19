@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { ServiceTimeSlot, getTimingsSummary, parseServiceTime } from '@/lib/timings';
 import {
   motion,
   useScroll,
@@ -120,7 +121,7 @@ const FAQS = [
 
 // ─── HERO ─────────────────────────────────────────────────────────────────────
 
-function HeroSection() {
+function HeroSection({ timings }: { timings: ReturnType<typeof getTimingsSummary> }) {
   const heroRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
@@ -203,7 +204,7 @@ function HeroSection() {
                   <span className="material-symbols-outlined text-[16px]">location_on</span>
                   Get Directions
                 </a>
-                <button className="border border-white/20 text-white px-8 py-3.5 rounded-full text-sm font-bold tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm font-body cursor-pointer flex items-center gap-2">
+                <button onClick={() => window.open('https://www.youtube.com/@SDAEnglishChurchVellore/streams', '_blank')} className="border border-white/20 text-white px-8 py-3.5 rounded-full text-sm font-bold tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm font-body cursor-pointer flex items-center gap-2">
                   <span className="material-symbols-outlined text-[16px]">live_tv</span>
                   Watch Live
                 </button>
@@ -220,9 +221,9 @@ function HeroSection() {
           >
             <div className="flex items-center gap-6 md:gap-10 flex-wrap">
               {[
-                { label: 'AY Service', value: 'Friday · 7:30 PM' },
-                { label: 'Sabbath School', value: 'Saturday · 8:45 AM' },
-                { label: 'Divine Worship', value: '10:30 AM' },
+                { label: 'AY Service', value: `${timings.ay.day} · ${timings.ay.timeOnly}` },
+                { label: 'Sabbath School', value: `${timings.sabbathSchool.day} · ${timings.sabbathSchool.timeOnly}` },
+                { label: 'Divine Worship', value: timings.divineService.timeOnly },
                 { label: 'Online Stream', value: 'Every Sabbath' },
                 { label: 'Location', value: 'SDA English Church, Otteri Rd, Bagayam, Vellore' },
               ].map((item, i) => (
@@ -540,7 +541,7 @@ function FAQSection({ faqs }: { faqs: any[] }) {
 
 // ─── LOCATION ──────────────────────────────────────────────────────────────────
 
-function LocationSection() {
+function LocationSection({ timings }: { timings: ReturnType<typeof getTimingsSummary> }) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -595,11 +596,14 @@ function LocationSection() {
                 <div>
                   <p className="text-[#e36520] text-[9px] font-black uppercase tracking-[0.4em] font-body mb-2">Service Times</p>
                   <p className="text-white/70 font-body text-[14px] leading-relaxed">
-                    AY Service: <span className="text-white font-semibold">7:30 PM (Friday)</span><br />
-                    Sabbath School: <span className="text-white font-semibold">8:45 AM (Saturday)</span><br />
-                    Divine Worship: <span className="text-white font-semibold">10:30 AM (Saturday)</span><br />
-                    Singing Band/Outreach: <span className="text-white font-semibold">3:30 PM (Saturday)</span><br />
-                    Vespers: <span className="text-white font-semibold">5:00 PM (Saturday)</span><br />
+                    {timings.slots.map(slot => {
+                      const p = parseServiceTime(slot);
+                      return (
+                        <React.Fragment key={slot.label}>
+                          {slot.label}: <span className="text-white font-semibold">{p.timeOnly} ({p.day})</span><br />
+                        </React.Fragment>
+                      );
+                    })}
                   </p>
                 </div>
               </div>
@@ -759,15 +763,22 @@ interface VisitClientProps {
   expectSteps?: ExpectStep[];
   schedule?: ScheduleSlot[];
   faqs?: FAQItemType[];
+  serviceTimes?: ServiceTimeSlot[];
 }
 
-export default function VisitClient({ expectSteps: propExpectSteps, schedule: propSchedule, faqs: propFaqs }: VisitClientProps) {
+export default function VisitClient({
+  expectSteps: propExpectSteps,
+  schedule: propSchedule,
+  faqs: propFaqs,
+  serviceTimes,
+}: VisitClientProps) {
+  const timings = getTimingsSummary(serviceTimes);
   const getStepIconAndColor = (title: string, index: number) => {
     const t = title.toLowerCase();
     if (t.includes('arrive') || t.includes('welcome')) return { icon: 'waving_hand', color: '#e36520' };
     if (t.includes('worship') || t.includes('sing') || t.includes('praise')) return { icon: 'music_note', color: '#5b2d9c' };
     if (t.includes('connect') || t.includes('lunch') || t.includes('eat')) return { icon: 'restaurant', color: '#448d21' };
-    
+
     const colors = ['#e36520', '#5b2d9c', '#448d21'];
     const icons = ['waving_hand', 'music_note', 'restaurant'];
     return {
@@ -778,15 +789,15 @@ export default function VisitClient({ expectSteps: propExpectSteps, schedule: pr
 
   const expectCards = propExpectSteps && propExpectSteps.length > 0
     ? propExpectSteps.map((s, idx) => {
-        const { icon: defaultIcon, color: defaultColor } = getStepIconAndColor(s.title, idx);
-        return {
-          icon: s.icon || defaultIcon,
-          step: s.step || `0${idx + 1}`,
-          title: s.title,
-          color: s.color || defaultColor,
-          body: s.body
-        };
-      })
+      const { icon: defaultIcon, color: defaultColor } = getStepIconAndColor(s.title, idx);
+      return {
+        icon: s.icon || defaultIcon,
+        step: s.step || `0${idx + 1}`,
+        title: s.title,
+        color: s.color || defaultColor,
+        body: s.body
+      };
+    })
     : EXPECT_CARDS;
 
   const getScheduleIcon = (label: string, index: number) => {
@@ -795,25 +806,25 @@ export default function VisitClient({ expectSteps: propExpectSteps, schedule: pr
     if (l.includes('worship') || l.includes('divine')) return 'church';
     if (l.includes('stream') || l.includes('online')) return 'live_tv';
     if (l.includes('youth') || l.includes('children') || l.includes('program')) return 'family_restroom';
-    
+
     const icons = ['book_4', 'church', 'live_tv', 'family_restroom'];
     return icons[index % icons.length];
   };
 
   const resolvedSchedule = propSchedule && propSchedule.length > 0
     ? propSchedule.map((s, idx) => ({
-        label: s.label,
-        time: s.time,
-        detail: s.detail || '',
-        icon: getScheduleIcon(s.label, idx)
-      }))
+      label: s.label,
+      time: s.time,
+      detail: s.detail || '',
+      icon: getScheduleIcon(s.label, idx)
+    }))
     : SCHEDULE;
 
   const resolvedFaqs = propFaqs && propFaqs.length > 0
     ? propFaqs.map(f => ({
-        q: f.question,
-        a: f.answer
-      }))
+      q: f.question,
+      a: f.answer
+    }))
     : FAQS;
 
   const uniqueFaqs = resolvedFaqs.filter((faq, idx, self) =>
@@ -822,11 +833,11 @@ export default function VisitClient({ expectSteps: propExpectSteps, schedule: pr
 
   return (
     <>
-      <HeroSection />
+      <HeroSection timings={timings} />
       <ExpectSection expectCards={expectCards} />
       <ScheduleSection schedule={resolvedSchedule} />
       <FAQSection faqs={uniqueFaqs} />
-      <LocationSection />
+      <LocationSection timings={timings} />
       <ClosingCTA />
     </>
   );

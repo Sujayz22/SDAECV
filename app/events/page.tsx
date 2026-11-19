@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
 import EventsClient from './EventsClient';
 import { sanityFetch } from '@/lib/sanity/live';
+import { getServiceTimes } from '@/lib/sanity/timings';
 
 export const metadata: Metadata = {
   title: 'Events & Calendar — SDAECV | Seventh Day Adventist English Church, Vellore',
@@ -33,12 +34,13 @@ export default async function EventsPage() {
     }`
   });
   const events = (eventsResult?.data as any[]) || [];
+  const serviceTimes = await getServiceTimes();
 
   return (
     <SmoothScroll>
       <div className="relative z-10 bg-[#f8f4ef]">
         <Navbar dark={true} />
-        <EventsClient events={events} />
+        <EventsClient events={events} serviceTimes={serviceTimes} />
       </div>
       <Footer />
     </SmoothScroll>

@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import { ServiceTimeSlot, parseServiceTime } from '@/lib/timings';
 
 interface WelcomeSectionProps {
     welcomeTitle?: string;
     welcomeSubtitle?: string;
     welcomeDescription?: string;
     welcomeImage?: any;
-    serviceTimes?: { label: string; time: string; detail?: string }[];
+    serviceTimes?: ServiceTimeSlot[];
 }
 
 /* ── Service schedule fallback data ────────────────────────────────────────── */
@@ -48,15 +49,12 @@ export default function WelcomeSection({
     const resolvedServices = serviceTimes && serviceTimes.length > 0
         ? serviceTimes.map((s) => {
             const { icon, accent } = getServiceIconAndAccent(s.label);
-            // Split day and time from 'Saturday · 8:45 AM'
-            const parts = s.time.split(' · ');
-            const day = parts[0] || 'Saturday';
-            const time = parts[1] || s.time;
+            const parsed = parseServiceTime(s);
             return {
                 icon,
                 name: s.label,
-                day,
-                time,
+                day: parsed.day,
+                time: parsed.timeOnly,
                 accent
             };
         })

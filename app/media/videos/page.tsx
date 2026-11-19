@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
 import VideosClient from './VideosClient';
 import { sanityFetch } from '@/lib/sanity/live';
+import { getServiceTimes } from '@/lib/sanity/timings';
 
 export const metadata: Metadata = {
   title: 'Videos — SDAECV | Seventh Day Adventist English Church, Vellore',
@@ -26,12 +27,13 @@ export default async function VideosPage() {
     }`
   });
   const videos = (videosResult?.data as any[]) || [];
+  const serviceTimes = await getServiceTimes();
 
   return (
     <SmoothScroll>
       <div className="relative z-10 bg-[#f8f4ef]">
         <Navbar dark={false} />
-        <VideosClient channelId={channelId} videos={videos} />
+        <VideosClient channelId={channelId} videos={videos} serviceTimes={serviceTimes} />
       </div>
       <Footer />
     </SmoothScroll>

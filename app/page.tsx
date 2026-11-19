@@ -91,6 +91,7 @@ export default async function Home() {
           subheadline={homeSettings?.heroSubheadline}
           ctaText={homeSettings?.heroCtaText}
           ctaUrl={homeSettings?.heroCtaUrl}
+          serviceTimes={homeSettings?.serviceTimes}
         />
         <WelcomeSection
           welcomeTitle={homeSettings?.welcomeTitle}
@@ -100,7 +101,10 @@ export default async function Home() {
           serviceTimes={homeSettings?.serviceTimes}
         />
         <MissionSection />
-        <MessageSection channelId={process.env.YOUTUBE_CHANNEL_ID || ''} />
+        <MessageSection
+          channelId={process.env.YOUTUBE_CHANNEL_ID || ''}
+          serviceTimes={homeSettings?.serviceTimes}
+        />
         <AnnouncementsSection announcements={announcements} />
         <EventsSection events={events} />
         <PrayerWallSection prayers={prayers} />
