@@ -13,11 +13,14 @@ export const metadata: Metadata = {
 };
 
 export default async function EventsPage() {
-  // Fetch events from Sanity
+  // Fetch events from Sanity sorted chronologically by date
   const eventsResult = await sanityFetch({
-    query: `*[_type == "event"] | order(year asc, month asc, day asc){
+    query: `*[_type == "event"] | order(date asc, year asc, day asc){
       title,
       category,
+      eventType,
+      recurrenceRule,
+      date,
       day,
       month,
       year,

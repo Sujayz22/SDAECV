@@ -132,14 +132,39 @@ interface SanityMinistry {
   description: string;
 }
 
+interface SanityContactMember {
+  name?: string;
+  designation?: string;
+  role?: string;
+  phone?: string;
+  email?: string;
+  note?: string;
+  photo?: any;
+}
+
+interface SanityConnectSettings {
+  generalEmail?: string;
+  generalPhone?: string;
+  address?: string;
+  mapsUrl?: string;
+  leadershipContacts?: SanityContactMember[];
+}
+
 interface ConnectClientProps {
   faqs?: SanityFAQ[];
   ministries?: SanityMinistry[];
   serviceTimes?: ServiceTimeSlot[];
   prayers?: SanityPrayerRequest[];
+  connectSettings?: SanityConnectSettings | null;
 }
 
-export default function ConnectClient({ faqs: propFaqs, ministries: propMinistries, serviceTimes, prayers }: ConnectClientProps) {
+export default function ConnectClient({
+  faqs: propFaqs,
+  ministries: propMinistries,
+  serviceTimes,
+  prayers,
+  connectSettings,
+}: ConnectClientProps) {
   const timings = getTimingsSummary(serviceTimes);
   const resolvedFaqs = propFaqs && propFaqs.length > 0
     ? propFaqs.map(f => ({
@@ -512,9 +537,8 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                   {/* Success state */}
                   {submitted ? (
                     <div className="bg-white rounded-3xl border border-[#140d23]/5 p-12 shadow-[0_10px_40px_-10px_rgba(20,13,35,0.08)] flex flex-col items-center text-center gap-6">
-                      <div className={`size-20 rounded-full flex items-center justify-center mb-2 ${
-                        submittedData?.type === 'prayer' ? 'bg-[#5b2d9c]/10 text-[#5b2d9c]' : 'bg-[#448d21]/10 text-[#448d21]'
-                      }`}>
+                      <div className={`size-20 rounded-full flex items-center justify-center mb-2 ${submittedData?.type === 'prayer' ? 'bg-[#5b2d9c]/10 text-[#5b2d9c]' : 'bg-[#448d21]/10 text-[#448d21]'
+                        }`}>
                         <span className="material-symbols-outlined text-4xl">
                           {submittedData?.type === 'prayer' ? 'volunteer_activism' : 'check_circle'}
                         </span>
@@ -769,27 +793,97 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                     </div>
                   </div>
 
-                  {/* Direct Contact */}
-                  <div className="group bg-white rounded-3xl border border-[#140d23]/5 p-8 shadow-[0_10px_40px_-10px_rgba(20,13,35,0.06)] flex items-start gap-6 hover:shadow-[0_20px_60px_-15px_rgba(227,101,32,0.12)] hover:-translate-y-1 transition-all duration-300">
-                    <div className="size-14 rounded-2xl bg-[#e36520]/10 text-[#e36520] flex items-center justify-center flex-shrink-0 group-hover:bg-[#e36520] group-hover:text-white transition-all duration-300">
-                      <span className="material-symbols-outlined text-2xl">contact_support</span>
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-black uppercase tracking-widest text-[#7a6d8e] mb-3">
-                        Direct Contact
-                      </h4>
-                      <a
-                        href="mailto:office@sdaecv.org"
-                        className="text-[#140d23] hover:text-[#5b2d9c] transition-colors font-bold text-base block"
-                      >
-                        office@sdaecv.org
-                      </a>
-                      <a
-                        href="tel:+914161234567"
-                        className="text-[#7a6d8e] text-sm font-medium mt-1 block hover:text-[#140d23] transition-colors"
-                      >
-                        +91 416 123 4567
-                      </a>
+                  {/* Contact (Unified: General + Additional Contacts) */}
+                  <div className="group bg-white rounded-3xl border border-[#140d23]/5 p-8 shadow-[0_10px_40px_-10px_rgba(20,13,35,0.06)] hover:shadow-[0_20px_60px_-15px_rgba(227,101,32,0.12)] hover:-translate-y-1 transition-all duration-300">
+                    <div className="flex items-start gap-6">
+                      <div className="size-14 rounded-2xl bg-[#e36520]/10 text-[#e36520] flex items-center justify-center flex-shrink-0 group-hover:bg-[#e36520] group-hover:text-white transition-all duration-300">
+                        <span className="material-symbols-outlined text-2xl">contact_support</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-xs font-black uppercase tracking-widest text-[#7a6d8e] mb-3">
+                          Contact
+                        </h4>
+                        {/* Primary general contact email */}
+                        {connectSettings?.generalEmail ? (
+                          <a
+                            href={`mailto:${connectSettings.generalEmail}`}
+                            className="text-[#140d23] hover:text-[#5b2d9c] transition-colors font-bold text-base block"
+                          >
+                            {connectSettings.generalEmail}
+                          </a>
+                        ) : (
+                          <a
+                            href="mailto:sdaecv.it@gmail.com"
+                            className="text-[#140d23] hover:text-[#5b2d9c] transition-colors font-bold text-base block"
+                          >
+                            sdaecv.it@gmail.com
+                          </a>
+                        )}
+                        {/* Primary general contact phone (optional) */}
+                        {connectSettings?.generalPhone && (
+                          <a
+                            href={`tel:${connectSettings.generalPhone.replace(/\s+/g, '')}`}
+                            className="text-[#7a6d8e] text-sm font-medium mt-1 block hover:text-[#140d23] transition-colors"
+                          >
+                            {connectSettings.generalPhone}
+                          </a>
+                        )}
+
+                        {/* Additional Contacts (Pastors, Elders, Leaders - all optional) */}
+                        {connectSettings?.leadershipContacts && connectSettings.leadershipContacts.length > 0 && (
+                          <div className="mt-6 pt-5 border-t border-[#140d23]/8 flex flex-col gap-4">
+                            {connectSettings.leadershipContacts.map((contact, idx) => {
+                              const designation = contact.designation || contact.role;
+                              const hasAnyInfo = contact.name || designation || contact.phone || contact.email;
+                              if (!hasAnyInfo) return null;
+
+                              return (
+                                <div key={idx} className="flex flex-col gap-1 text-sm">
+                                  {(contact.name || designation) && (
+                                    <div className="flex flex-wrap items-baseline gap-2">
+                                      {contact.name && (
+                                        <span className="font-bold text-[#140d23]">{contact.name}</span>
+                                      )}
+                                      {designation && (
+                                        <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#5b2d9c]/10 text-[#5b2d9c]">
+                                          {designation}
+                                        </span>
+                                      )}
+                                    </div>
+                                  )}
+
+                                  {contact.note && (
+                                    <p className="text-xs text-[#7a6d8e] italic leading-relaxed">
+                                      {contact.note}
+                                    </p>
+                                  )}
+
+                                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs mt-0.5">
+                                    {contact.phone && (
+                                      <a
+                                        href={`tel:${contact.phone.replace(/\s+/g, '')}`}
+                                        className="inline-flex items-center gap-1.5 text-[#5b2d9c] font-semibold hover:text-[#e36520] transition-colors"
+                                      >
+                                        <span className="material-symbols-outlined text-[14px]">call</span>
+                                        {contact.phone}
+                                      </a>
+                                    )}
+                                    {contact.email && (
+                                      <a
+                                        href={`mailto:${contact.email}`}
+                                        className="inline-flex items-center gap-1.5 text-[#5b2d9c] font-semibold hover:text-[#e36520] transition-colors"
+                                      >
+                                        <span className="material-symbols-outlined text-[14px]">mail</span>
+                                        {contact.email}
+                                      </a>
+                                    )}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -802,15 +896,11 @@ export default function ConnectClient({ faqs: propFaqs, ministries: propMinistri
                       <h4 className="text-xs font-black uppercase tracking-widest text-[#7a6d8e] mb-3">
                         Our Location
                       </h4>
-                      <p className="text-sm font-semibold text-[#140d23] leading-relaxed">
-                        SDA English Church
-                        <br />
-                        Otteri Road, Bagayam
-                        <br />
-                        Vellore, Tamil Nadu — 632002
+                      <p className="text-sm font-semibold text-[#140d23] leading-relaxed whitespace-pre-line">
+                        {connectSettings?.address || 'SDA English Church\nOtteri Road, Bagayam\nVellore, Tamil Nadu — 632002'}
                       </p>
                       <a
-                        href="https://maps.app.goo.gl/wqVwkb6SpbF9aUBS8"
+                        href={connectSettings?.mapsUrl || "https://maps.app.goo.gl/wqVwkb6SpbF9aUBS8"}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 text-[#5b2d9c] text-xs font-black mt-4 hover:text-[#e36520] transition-colors uppercase tracking-widest"

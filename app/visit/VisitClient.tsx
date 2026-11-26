@@ -709,7 +709,7 @@ function ClosingCTA() {
         </div>
 
         <motion.p variants={fadeUp} custom={3} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="text-white/55 text-[16px] leading-relaxed font-body max-w-2xl mx-auto mb-12">
-          The doors open every Saturday morning. No appointment needed, no perfect faith required. Simply come and see.
+          The doors open every Sabbath. No appointment needed, no perfect faith required. Simply come and see.
         </motion.p>
 
         <motion.div variants={fadeUp} custom={4} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="flex flex-wrap items-center justify-center gap-4">

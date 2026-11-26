@@ -49,6 +49,31 @@ export default async function ConnectPage() {
   });
   const prayers = (prayersResult?.data as any[]) || [];
 
+  // Fetch connectPageSettings from Sanity
+  const connectSettingsResult = await sanityFetch({
+    query: `*[_type == "connectPageSettings"][0]{
+      generalEmail,
+      generalPhone,
+      address,
+      mapsUrl,
+      leadershipContacts[]{
+        name,
+        designation,
+        role,
+        phone,
+        email,
+        note,
+        photo {
+          asset->{
+            _id,
+            url
+          }
+        }
+      }
+    }`
+  });
+  const connectSettings = (connectSettingsResult?.data as any) || null;
+
   const serviceTimes = await getServiceTimes();
 
   return (
@@ -60,6 +85,7 @@ export default async function ConnectPage() {
           ministries={ministries}
           prayers={prayers}
           serviceTimes={serviceTimes}
+          connectSettings={connectSettings}
         />
       </div>
       <Footer />

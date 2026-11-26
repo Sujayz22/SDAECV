@@ -58,11 +58,11 @@ export default function Hero({ headline, subheadline, ctaText, ctaUrl, serviceTi
                 <div className="flex items-center justify-between pt-36 md:pt-40">
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-px bg-[#e36520]" />
-                        <span className="text-white/35 text-[10px] uppercase tracking-[0.45em] font-body">
+                        <span className="text-white/80 text-[10px] uppercase tracking-[0.45em] font-bold font-body">
                             Seventh-day Adventist
                         </span>
                     </div>
-                    <span className="text-white/35 text-[10px] uppercase tracking-[0.45em] font-body hidden sm:block">
+                    <span className="text-white/80 text-[10px] uppercase tracking-[0.45em] font-bold font-body hidden sm:block">
                         Vellore, Tamil Nadu
                     </span>
                 </div>

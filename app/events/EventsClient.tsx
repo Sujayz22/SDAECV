@@ -3,8 +3,10 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import AddToCalendar from '@/components/AddToCalendar';
+import ReminderButton from '@/components/ReminderButton';
 import type { CalendarEvent } from '@/lib/calendar';
 import { ServiceTimeSlot, getTimingsSummary } from '@/lib/timings';
+import { expandRecurringEvents, RawEvent } from '@/lib/eventRecurrence';
 
 /* ── Types ──────────────────────────────────────────────────────────────── */
 type Category = 'All' | 'Worship' | 'Community' | 'Kids & Youth' | 'Outreach' | 'Study';
@@ -13,6 +15,8 @@ interface Event {
   id: number;
   title: string;
   category: Exclude<Category, 'All'>;
+  eventType?: string;
+  recurrenceRule?: string;
   day: number;
   month: string;
   monthIndex: number; // 0-based
@@ -30,9 +34,9 @@ const EVENTS: Event[] = [
     id: 1,
     title: 'Sabbath School',
     category: 'Worship',
-    day: 7,
-    month: 'Jun',
-    monthIndex: 5,
+    day: 28,
+    month: 'Nov',
+    monthIndex: 10,
     year: 2026,
     time: '8:45 AM – 10:15 AM',
     location: 'Main Sanctuary',
@@ -46,14 +50,14 @@ const EVENTS: Event[] = [
     id: 2,
     title: 'Divine Service',
     category: 'Worship',
-    day: 7,
-    month: 'Jun',
-    monthIndex: 5,
+    day: 28,
+    month: 'Nov',
+    monthIndex: 10,
     year: 2026,
     time: '10:30 AM – 12:00 PM',
     location: 'Main Sanctuary',
     description:
-      'Our main weekly worship service with sermon, praise, and Holy Communion on the fifth Sabbath.',
+      'Our main weekly worship service with sermon, praise, and fellowship.',
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuDzr4tT75Cimgi2-_IWpq3xSoNGF2Xv5jOXikuYq2aTR_rJIo9zKMf_sjqCCrmexcLSRelEIspgL8Wn8QcKnM3q0SYk0-xk_mfSMjpKkO6kid3AywGcASuYqF4OLzo34MmdqNHl45iFXenK00rZQz43aPc0pZ_oBjHZzq30LHid9tJYNazvZlYtJranXrgNAfSbeSf4HX66CV9g65NuQVHMbLXcaCZjGIndq1myQYIhY2kCdVwLRg8cbIGrOjNFyGs5CLfs0osIuGo',
     featured: true,
@@ -62,9 +66,9 @@ const EVENTS: Event[] = [
     id: 3,
     title: 'Community Potluck',
     category: 'Community',
-    day: 7,
-    month: 'Jun',
-    monthIndex: 5,
+    day: 28,
+    month: 'Nov',
+    monthIndex: 10,
     year: 2026,
     time: '12:30 PM – 2:00 PM',
     location: 'Fellowship Hall',
@@ -77,14 +81,14 @@ const EVENTS: Event[] = [
     id: 4,
     title: 'Mid-Week Bible Study',
     category: 'Study',
-    day: 11,
-    month: 'Jun',
-    monthIndex: 5,
+    day: 2,
+    month: 'Dec',
+    monthIndex: 11,
     year: 2026,
     time: '6:30 PM – 8:00 PM',
     location: 'Fellowship Hall',
     description:
-      'Deep dive into the Book of Revelation. Coffee and light refreshments served. Come ready to learn and discuss.',
+      'Deep dive into the Scriptures. Coffee and light refreshments served. Come ready to learn and discuss.',
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuBi4pu4koMgsVbz2sRTm7NZedPW2jnR1Et-eWeFsfNzC9vpgFejcVb1OqlTcFIZp5QXJtwFN7drtIe2yOXpFz0phwjUC2YvU1YwhSjT27Hk8a0uZFwjkSyxYa7eOm1KjuLaNFRNllQMW88U5vChvaSy6Ma3mjerEVV121aaRf-Mm1c1Yq-_VYqkuRkfnqFBnpter4sHTWYFuUhi6ADzmEC43n2axkU_YtPXOX0pRuFKLV6mf-o4yanpGDWKlg_RgXFTvnljxH1u_IU',
   },
@@ -92,9 +96,9 @@ const EVENTS: Event[] = [
     id: 5,
     title: 'Youth Night',
     category: 'Kids & Youth',
-    day: 13,
-    month: 'Jun',
-    monthIndex: 5,
+    day: 5,
+    month: 'Dec',
+    monthIndex: 11,
     year: 2026,
     time: '7:00 PM – 9:00 PM',
     location: 'Youth Room',
@@ -107,9 +111,9 @@ const EVENTS: Event[] = [
     id: 6,
     title: 'City Serve Day',
     category: 'Outreach',
-    day: 21,
-    month: 'Jun',
-    monthIndex: 5,
+    day: 12,
+    month: 'Dec',
+    monthIndex: 11,
     year: 2026,
     time: '9:00 AM – 1:00 PM',
     location: 'Vellore City',
@@ -120,46 +124,17 @@ const EVENTS: Event[] = [
   },
   {
     id: 7,
-    title: 'Sabbath School',
-    category: 'Worship',
-    day: 14,
-    month: 'Jun',
-    monthIndex: 5,
+    title: "Men's Breakfast",
+    category: 'Community',
+    day: 16,
+    month: 'Dec',
+    monthIndex: 11,
     year: 2026,
-    time: '8:45 AM – 10:15 AM',
-    location: 'Main Sanctuary',
-    description: 'Weekly interactive Bible study for all age groups.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuC6QjG-uoF5tAnJyBrZ229c47c4Jtd-Ymjp3R2vfxNnXsbQPIyZSBcSCdoAA04FbmRITLnS8-idTrEbuVv2NYw8STDOLKjI8wG7NCXt_dFx7W0Dx_G9t-Xs1QJn9onza5RgkdRvvm3tadNxGEHsAjPF4FEcIy3cn1t49tLwTiWn04H4IicCIM2SrnLi9-pC5OE2tGLxYs_BMOAhsEyug5S4zmG5m4Fp41CQoKVBK2NcblH_ci6t6NgkkAGnw9QYFVSmbVNwLDbHDzQ',
-  },
-  {
-    id: 8,
-    title: 'Prayer Meeting',
-    category: 'Worship',
-    day: 18,
-    month: 'Jun',
-    monthIndex: 5,
-    year: 2026,
-    time: '7:00 PM – 8:00 PM',
-    location: 'Chapel',
-    description:
-      'A mid-week gathering for corporate prayer and intercession. All are welcome to bring their requests.',
+    time: '7:00 AM – 8:30 AM',
+    location: 'Fellowship Hall',
+    description: 'A time for men to gather, eat, and encourage one another.',
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuBn_qsRAj0xLppIyYr5F-vCpCNSL9Dt59WrXQn_XtvUW2wuFUS81czcDjymI0J2z2pM5H6_2Fgcy0IycJKkSShyX0a7aCGUgp4ujnWKst8kN0AN76Z07dB-H4IdhfOilUWyrHX1LYur2INaTBrLG5EoWEJ-zSSjsQDmYEdecp6DfosAKZ6815_3GLlbPhh49pa4pF7Aj8ieM0q0dTMKvi6ljIAHI_zosp7in9f4TZoDPEnDyUWjGKD709kB8wVfEY',
-  },
-  {
-    id: 9,
-    title: "Women's Ministry Meeting",
-    category: 'Community',
-    day: 20,
-    month: 'Jun',
-    monthIndex: 5,
-    year: 2026,
-    time: '10:00 AM – 12:00 PM',
-    location: 'Fellowship Hall',
-    description: 'Monthly gathering for the women of SDAECV — devotion, sharing, and fellowship.',
-    image:
-      'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80',
   },
 ];
 
@@ -203,6 +178,8 @@ const MONTH_MAP: Record<string, number> = {
 interface SanityEvent {
   title: string;
   category: string;
+  eventType?: string;
+  recurrenceRule?: string;
   day: number;
   month: string;
   year: number;
@@ -229,20 +206,37 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
   const resolvedEvents = useMemo(() => {
-    if (!propEvents || propEvents.length === 0) return EVENTS;
-    return propEvents.map((e, idx) => ({
+    const rawList: RawEvent[] = (!propEvents || propEvents.length === 0)
+      ? EVENTS.map(e => ({
+          ...e,
+          eventType: e.eventType || 'one_time',
+          recurrenceRule: e.recurrenceRule,
+        }))
+      : propEvents.map(e => ({
+          ...e,
+          eventType: e.eventType || 'one_time',
+          recurrenceRule: e.recurrenceRule,
+        }));
+
+    // Expand recurring events so every recurring occurrence is automatically projected on the calendar
+    const expanded = expandRecurringEvents(rawList, { weeksAhead: 16 });
+
+    return expanded.map((e, idx) => ({
       id: idx + 1,
       title: e.title,
       category: e.category as Exclude<Category, 'All'>,
+      eventType: e.eventType,
+      recurrenceRule: e.recurrenceRule,
       day: e.day,
       month: e.month,
-      monthIndex: MONTH_MAP[e.month] ?? 0,
+      monthIndex: e.monthIndex,
       year: e.year,
       time: e.time,
       location: e.location,
       description: e.description,
-      image: e.image?.asset?.url || 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80',
-      featured: e.featured
+      image: e.image,
+      featured: e.featured,
+      eventDate: e.eventDate,
     }));
   }, [propEvents]);
 
@@ -364,7 +358,7 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2 mb-1">
                 <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-bold text-red-700 ring-1 ring-inset ring-red-600/10 animate-pulse">
-                  This Saturday
+                  This Sabbath
                 </span>
                 <span className="text-[#7a6d8e] text-sm font-medium">Sabbath Service</span>
               </div>
@@ -403,11 +397,10 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                 key={cat}
                 id={`filter-${cat.replace(/\s+/g, '-').toLowerCase()}`}
                 onClick={() => { setActiveFilter(cat); setSelectedDay(null); }}
-                className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all active:scale-95 ${
-                  activeFilter === cat
-                    ? 'bg-[#5b2d9c] text-white shadow-md ring-2 ring-[#5b2d9c] ring-offset-2 ring-offset-[#f8f4ef]'
-                    : 'bg-white border border-[#140d23]/10 text-[#7a6d8e] hover:text-[#5b2d9c] hover:border-[#5b2d9c]/30 hover:bg-[#5b2d9c]/5 hover:-translate-y-0.5'
-                }`}
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all active:scale-95 ${activeFilter === cat
+                  ? 'bg-[#5b2d9c] text-white shadow-md ring-2 ring-[#5b2d9c] ring-offset-2 ring-offset-[#f8f4ef]'
+                  : 'bg-white border border-[#140d23]/10 text-[#7a6d8e] hover:text-[#5b2d9c] hover:border-[#5b2d9c]/30 hover:bg-[#5b2d9c]/5 hover:-translate-y-0.5'
+                  }`}
               >
                 {cat}
               </button>
@@ -419,11 +412,10 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
             <button
               id="view-calendar"
               onClick={() => setViewMode('calendar')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                viewMode === 'calendar'
-                  ? 'bg-[#5b2d9c] text-white shadow-sm'
-                  : 'text-[#7a6d8e] hover:text-[#140d23]'
-              }`}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${viewMode === 'calendar'
+                ? 'bg-[#5b2d9c] text-white shadow-sm'
+                : 'text-[#7a6d8e] hover:text-[#140d23]'
+                }`}
             >
               <span className="material-symbols-outlined text-[18px]">calendar_month</span>
               <span className="hidden sm:inline">Calendar</span>
@@ -431,11 +423,10 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
             <button
               id="view-list"
               onClick={() => setViewMode('list')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-                viewMode === 'list'
-                  ? 'bg-[#5b2d9c] text-white shadow-sm'
-                  : 'text-[#7a6d8e] hover:text-[#140d23]'
-              }`}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${viewMode === 'list'
+                ? 'bg-[#5b2d9c] text-white shadow-sm'
+                : 'text-[#7a6d8e] hover:text-[#140d23]'
+                }`}
             >
               <span className="material-symbols-outlined text-[18px]">format_list_bulleted</span>
               <span className="hidden sm:inline">List</span>
@@ -514,25 +505,23 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                   <div
                     key={idx}
                     onClick={() => isCurrentMonth && setSelectedDay(isSelected ? null : dayNum)}
-                    className={`relative p-2 md:p-3 transition-colors ${
-                      !isCurrentMonth
-                        ? 'bg-[#f8f4ef]/30 text-[#140d23]/20'
-                        : isToday
+                    className={`relative p-2 md:p-3 transition-colors ${!isCurrentMonth
+                      ? 'bg-[#f8f4ef]/30 text-[#140d23]/20'
+                      : isToday
                         ? 'bg-[#5b2d9c]/5 ring-inset ring-2 ring-[#5b2d9c]/20 cursor-pointer hover:bg-[#5b2d9c]/10'
                         : isSelected
-                        ? 'bg-[#e36520]/5 ring-inset ring-2 ring-[#e36520]/20 cursor-pointer'
-                        : 'hover:bg-[#f8f4ef]/70 cursor-pointer'
-                    }`}
+                          ? 'bg-[#e36520]/5 ring-inset ring-2 ring-[#e36520]/20 cursor-pointer'
+                          : 'hover:bg-[#f8f4ef]/70 cursor-pointer'
+                      }`}
                   >
                     {isCurrentMonth ? (
                       <span
-                        className={`inline-flex size-7 items-center justify-center rounded-full text-sm font-semibold transition-all ${
-                          isToday
-                            ? 'bg-[#5b2d9c] text-white shadow-md scale-110'
-                            : isSelected
+                        className={`inline-flex size-7 items-center justify-center rounded-full text-sm font-semibold transition-all ${isToday
+                          ? 'bg-[#5b2d9c] text-white shadow-md scale-110'
+                          : isSelected
                             ? 'bg-[#e36520] text-white shadow-md'
                             : 'text-[#140d23] hover:bg-white hover:shadow-sm'
-                        }`}
+                          }`}
                       >
                         {dayNum}
                       </span>
@@ -649,10 +638,18 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                   {/* content */}
                   <div className="flex-1 p-6 flex flex-col justify-between">
                     <div className="flex flex-col gap-2">
-                      <div className="flex justify-between items-start">
-                        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ring-1 ring-inset ${CATEGORY_BADGE[evt.category]}`}>
-                          {evt.category.toUpperCase()}
-                        </span>
+                      <div className="flex justify-between items-start flex-wrap gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ring-1 ring-inset ${CATEGORY_BADGE[evt.category]}`}>
+                            {evt.category.toUpperCase()}
+                          </span>
+                          {evt.eventType && evt.eventType !== 'one_time' && (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-[#5b2d9c]/10 text-[#5b2d9c] ring-1 ring-inset ring-[#5b2d9c]/20 px-2 py-0.5 text-xs font-semibold">
+                              <span className="material-symbols-outlined text-[13px]">repeat</span>
+                              {evt.recurrenceRule || 'Recurring'}
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <h3 className="text-[#140d23] text-xl font-bold leading-tight group-hover:text-[#5b2d9c] transition-colors">
                         {evt.title}
@@ -669,7 +666,7 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                       </div>
                       <p className="text-[#7a6d8e] text-sm leading-relaxed mt-1">{evt.description}</p>
                     </div>
-                    <div className="flex items-center justify-between mt-4 pt-4 border-t border-[#140d23]/5 flex-wrap gap-3">
+                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-[#140d23]/5">
                       <AddToCalendar
                         event={{
                           title: evt.title,
@@ -682,13 +679,16 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                         } as CalendarEvent}
                         variant="dark"
                       />
-                      <Link
-                        href="/connect"
-                        className="flex items-center gap-1.5 text-sm font-bold text-[#5b2d9c] hover:text-[#e36520] transition-colors"
-                      >
-                        Register / Learn More
-                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                      </Link>
+                      <ReminderButton
+                        event={{
+                          title: evt.title,
+                          description: evt.description,
+                          location: evt.location,
+                          time: evt.time,
+                          eventDate: evt.eventDate,
+                        }}
+                        variant="dark"
+                      />
                     </div>
                   </div>
                 </div>
@@ -777,8 +777,29 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                   <p className="text-[13px] text-white/50 leading-relaxed mb-6">
                     {featuredEvents[0].description}
                   </p>
-                  <div className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest text-white/0 group-hover:text-[#e36520] translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Learn More <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <div className="mt-6 flex items-center gap-3">
+                    <AddToCalendar
+                      event={{
+                        title: featuredEvents[0].title,
+                        description: featuredEvents[0].description,
+                        location: featuredEvents[0].location,
+                        monthIndex: featuredEvents[0].monthIndex,
+                        day: featuredEvents[0].day,
+                        year: featuredEvents[0].year,
+                        time: featuredEvents[0].time,
+                      } as CalendarEvent}
+                      variant="light"
+                    />
+                    <ReminderButton
+                      event={{
+                        title: featuredEvents[0].title,
+                        description: featuredEvents[0].description,
+                        location: featuredEvents[0].location,
+                        time: featuredEvents[0].time,
+                        eventDate: featuredEvents[0].eventDate,
+                      }}
+                      variant="light"
+                    />
                   </div>
                 </div>
               </div>
@@ -814,8 +835,29 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                       <span className="material-symbols-outlined text-[12px]">schedule</span>
                       <span>{featuredEvents[1].time}</span>
                     </div>
-                    <div className="mt-4 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-white/0 group-hover:text-[#e36520] translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                      Learn More <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                    <div className="mt-4 flex items-center gap-3">
+                      <AddToCalendar
+                        event={{
+                          title: featuredEvents[1].title,
+                          description: featuredEvents[1].description,
+                          location: featuredEvents[1].location,
+                          monthIndex: featuredEvents[1].monthIndex,
+                          day: featuredEvents[1].day,
+                          year: featuredEvents[1].year,
+                          time: featuredEvents[1].time,
+                        } as CalendarEvent}
+                        variant="light"
+                      />
+                      <ReminderButton
+                        event={{
+                          title: featuredEvents[1].title,
+                          description: featuredEvents[1].description,
+                          location: featuredEvents[1].location,
+                          time: featuredEvents[1].time,
+                          eventDate: featuredEvents[1].eventDate,
+                        }}
+                        variant="light"
+                      />
                     </div>
                   </div>
                 </div>
@@ -849,8 +891,29 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                       <span className="material-symbols-outlined text-[12px]">schedule</span>
                       <span>{featuredEvents[2].time}</span>
                     </div>
-                    <div className="mt-4 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-white/0 group-hover:text-[#e36520] translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                      Learn More <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                    <div className="mt-4 flex items-center gap-3">
+                      <AddToCalendar
+                        event={{
+                          title: featuredEvents[2].title,
+                          description: featuredEvents[2].description,
+                          location: featuredEvents[2].location,
+                          monthIndex: featuredEvents[2].monthIndex,
+                          day: featuredEvents[2].day,
+                          year: featuredEvents[2].year,
+                          time: featuredEvents[2].time,
+                        } as CalendarEvent}
+                        variant="light"
+                      />
+                      <ReminderButton
+                        event={{
+                          title: featuredEvents[2].title,
+                          description: featuredEvents[2].description,
+                          location: featuredEvents[2].location,
+                          time: featuredEvents[2].time,
+                          eventDate: featuredEvents[2].eventDate,
+                        }}
+                        variant="light"
+                      />
                     </div>
                   </div>
                 </div>
@@ -909,7 +972,7 @@ export default function EventsClient({ events: propEvents, serviceTimes }: Event
                 style={{ fontFamily: 'var(--font-newsreader)' }}
               >
                 Join us this{' '}
-                <em className="italic text-[#5b2d9c]">Saturday</em>.
+                <em className="italic text-[#5b2d9c]">Sabbath</em>.
               </h2>
               <p className="text-[#7a6d8e] text-lg leading-relaxed">
                 Every soul is welcome. Worship with us at the Seventh-day Adventist English Church

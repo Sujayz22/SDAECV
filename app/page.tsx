@@ -35,24 +35,36 @@ export default async function Home() {
 
   // Fetch announcements
   const announcementsResult = await sanityFetch({
-    query: `*[_type == "announcement"] | order(date desc)[0...10]{
+    query: `*[_type == "announcement"] | order(urgent desc, _createdAt desc)[0...10]{
       _id,
       title,
       date,
+      time,
+      location,
       category,
       content,
+      image {
+        asset->{
+          _id,
+          url
+        }
+      },
+      urgent,
       linkText,
       linkUrl
     }`
   });
   const announcements = (announcementsResult?.data as any[]) || [];
 
-  // Fetch events
+  // Fetch events sorted by date
   const eventsResult = await sanityFetch({
-    query: `*[_type == "event"] | order(year desc, monthIndex desc, day desc)[0...10]{
+    query: `*[_type == "event"] | order(date asc, year asc, day asc)[0...20]{
       _id,
       title,
       category,
+      eventType,
+      recurrenceRule,
+      date,
       day,
       month,
       year,
