@@ -62,7 +62,7 @@ export default function WatchLiveButton({
     return null;
   }
 
-  const targetChannelId = liveStatus.channelId;
+  const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@sdaenglishchurchvellore';
 
   // 1. Live State: Pulse action button
   if (liveStatus.isLive && liveStatus.videoId) {
@@ -87,16 +87,11 @@ export default function WatchLiveButton({
     );
   }
 
-  // If there is no channel ID configured, do not render a link
-  if (!targetChannelId) {
-    return null;
-  }
-
   // 2. Offline State: Render YouTube Channel Link Button
   if (isMobile) {
     return (
       <a
-        href={`https://www.youtube.com/channel/${targetChannelId}`}
+        href={YOUTUBE_CHANNEL_URL}
         target="_blank"
         rel="noopener noreferrer"
         onClick={onClick}
@@ -115,7 +110,7 @@ export default function WatchLiveButton({
 
   return (
     <a
-      href={`https://www.youtube.com/channel/${targetChannelId}`}
+      href={YOUTUBE_CHANNEL_URL}
       target="_blank"
       rel="noopener noreferrer"
       onClick={onClick}

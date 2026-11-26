@@ -302,7 +302,7 @@ export default function VideosClient({ channelId, videos: propVideos, serviceTim
   return (
     <div className="min-h-screen pt-28 pb-24 px-6 md:px-12 lg:px-20 max-w-[1440px] mx-auto">
       {/* ── Page Header ── */}
-      <div className="text-center mb-16 max-w-2xl mx-auto">
+      <div className="text-center mb-16 mt-6 max-w-2xl mx-auto">
         <div className="flex items-center justify-center gap-3 mb-4">
           <span className="h-px w-8 bg-[#e36520]" />
           <span className="text-[#e36520] font-bold tracking-[0.2em] uppercase text-xs">

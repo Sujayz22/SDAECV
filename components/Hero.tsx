@@ -55,7 +55,7 @@ export default function Hero({ headline, subheadline, ctaText, ctaUrl, serviceTi
             <div className="relative z-10 min-h-screen flex flex-col mx-auto max-w-[1440px] px-6 md:px-12 lg:px-20">
 
                 {/* Top marquee bar */}
-                <div className="flex items-center justify-between pt-36 md:pt-40">
+                <div className="flex items-center justify-between pt-36 mb-3 md:pt-40 md:mb-0">
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-px bg-[#e36520]" />
                         <span className="text-white/80 text-[10px] uppercase tracking-[0.45em] font-bold font-body">
